@@ -1,0 +1,56 @@
+{
+  "name": "tree-sitter-plsql",
+  "version": "1.0.0",
+  "description": "tree-sitter for plsql language",
+  "main": "index.js",
+  "types": "bindings/node",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "node-gyp-build",
+    "prebuildify": "prebuildify --napi --strip"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zerabba/tree-sitter-plsql.git"
+  },
+  "keywords": [
+    "tree-sitter",
+    "plsql"
+  ],
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**"
+  ],
+  "author": "zerabba",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zerabba/tree-sitter-plsql/issues"
+  },
+  "homepage": "https://github.com/zerabba/tree-sitter-plsql#readme",
+  "dependencies": {
+    "node-addon-api": "^7.1.0",
+    "node-gyp-build": "^4.8.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.21.0"
+  },
+  "peerDependenciesMeta": {
+    "tree_sitter": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.22.4",
+    "prebuildify": "^6.0.0"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.plsql",
+      "injection-regex": "^plsql$"
+    }
+  ]
+}
