@@ -129,6 +129,14 @@
               },
               {
                 "type": "SYMBOL",
+                "name": "exception_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "type_declaration"
+              },
+              {
+                "type": "SYMBOL",
                 "name": "function_specification"
               },
               {
@@ -165,6 +173,27 @@
               "type": "BLANK"
             }
           ]
+        }
+      ]
+    },
+    "exception_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kException"
+        },
+        {
+          "type": "STRING",
+          "value": ";"
         }
       ]
     },
@@ -358,6 +387,332 @@
         {
           "type": "STRING",
           "value": ";"
+        }
+      ]
+    },
+    "record_type_def": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kRecord"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "field_spec"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "field_spec"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": ")"
+            }
+          ]
+        }
+      ]
+    },
+    "field_spec": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type_spec"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "kNot"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "kNull"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "default_value_part"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "ref_cursor_type_def": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kRef"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kCursor"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "kReturn"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "type_spec"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "type_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kType"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kIs"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "table_type_def"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "varray_type_def"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "record_type_def"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "ref_cursor_type_def"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ";"
+        }
+      ]
+    },
+    "table_type_def": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kTable"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kOf"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type_spec"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "table_indexed_by_part"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "kNot"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "kNull"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "table_indexed_by_part": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kIndexed"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "kIndex"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kBy"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type_spec"
+        }
+      ]
+    },
+    "varray_type_def": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kVarray"
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "kVarying"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "kArray"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "SYMBOL",
+              "name": "expression"
+            },
+            {
+              "type": "STRING",
+              "value": ")"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kOf"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type_spec"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "kNot"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "kNull"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -6573,6 +6928,34 @@
     "kRowType": {
       "type": "PATTERN",
       "value": "[rR][oO][wW][tT][yY][pP][eE]"
+    },
+    "kRecord": {
+      "type": "PATTERN",
+      "value": "[rR][eE][cC][oO][rR][dD]"
+    },
+    "kIndexed": {
+      "type": "PATTERN",
+      "value": "[iI][nN][dD][eE][xX][eE][dD]"
+    },
+    "kIndex": {
+      "type": "PATTERN",
+      "value": "[iI][nN][dD][eE][xX]"
+    },
+    "kVarying": {
+      "type": "PATTERN",
+      "value": "[vV][aA][rR][yY][iI][nN][gG]"
+    },
+    "kArray": {
+      "type": "PATTERN",
+      "value": "[aA][rR][rR][aA][yY]"
+    },
+    "kVarray": {
+      "type": "PATTERN",
+      "value": "[vV][aA][rR][rR][aA][yY]"
+    },
+    "kException": {
+      "type": "PATTERN",
+      "value": "[eE][xX][cC][eE][pP][tT][iI][oO][nN]"
     },
     "char": {
       "type": "PREC_RIGHT",

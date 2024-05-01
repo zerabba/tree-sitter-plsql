@@ -53,6 +53,8 @@ module.exports = grammar({
           $.variable_declaration,
           $.subtype_declaration,
           $.cursoor_declaration,
+          $.exception_declaration,
+          $.type_declaration,
           $.function_specification,
           $.procedure_specification,
         ),
@@ -60,6 +62,12 @@ module.exports = grammar({
       $.kEnd,
       optional($._identifier),
       optional(';')
+    ),
+
+    exception_declaration: $ => seq(
+      field("name", $.identifier),
+      $.kException,
+      ';',
     ),
 
     pragma_declaration: $ => seq(
@@ -86,6 +94,59 @@ module.exports = grammar({
            ),
       ),
       ';',
+    ),
+
+    record_type_def: $ => seq(
+      $.kRecord,
+      wrapped_in_parenthesis(commaSep1($.field_spec)),
+    ),
+
+    field_spec: $ => seq(
+      field("name", $.identifier),
+      $.type_spec,
+      optional(seq($.kNot, $.kNull)),
+      optional($.default_value_part),
+    ),
+
+    ref_cursor_type_def: $ => seq(
+      $.kRef,
+      $.kCursor,
+      optional(seq($.kReturn, $.type_spec)),
+    ),
+
+    type_declaration: $ => seq(
+      $.kType,
+      field("name", $.identifier),
+      $.kIs,
+      choice(
+        $.table_type_def,
+        $.varray_type_def,
+        $.record_type_def,
+        $.ref_cursor_type_def,
+      ),
+      ';',
+    ),
+
+    table_type_def: $ => seq(
+      $.kTable,
+      $.kOf,
+      $.type_spec,
+      optional($.table_indexed_by_part),
+      optional(seq($.kNot, $.kNull)),
+    ),
+
+    table_indexed_by_part: $ => seq(
+      choice($.kIndexed, $.kIndex),
+      $.kBy,
+      $.type_spec,
+    ),
+
+    varray_type_def: $ => seq(
+      choice($.kVarray, seq($.kVarying, $.kArray)),
+      wrapped_in_parenthesis($.expression),
+      $.kOf,
+      $.type_spec,
+      optional(seq($.kNot, $.kNull)),
     ),
 
     variable_declaration: $ => seq(
@@ -1083,6 +1144,13 @@ module.exports = grammar({
     kFollowing: _ => make_keyword("FOLLOWING"),
     kRef: _ => make_keyword("REF"),
     kRowType: _ => make_keyword("ROWTYPE"),
+    kRecord: _ => make_keyword("RECORD"),
+    kIndexed: _ => make_keyword("INDEXED"),
+    kIndex: _ => make_keyword("INDEX"),
+    kVarying: _ => make_keyword("VARYING"),
+    kArray: _ => make_keyword("ARRAY"),
+    kVarray: _ => make_keyword("VARRAY"),
+    kException: _ => make_keyword("EXCEPTION"),
 
 
 

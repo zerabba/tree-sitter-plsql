@@ -291,6 +291,10 @@
           "named": true
         },
         {
+          "type": "exception_declaration",
+          "named": true
+        },
+        {
           "type": "function_specification",
           "named": true
         },
@@ -336,6 +340,10 @@
         },
         {
           "type": "subtype_declaration",
+          "named": true
+        },
+        {
+          "type": "type_declaration",
           "named": true
         },
         {
@@ -558,6 +566,32 @@
     }
   },
   {
+    "type": "exception_declaration",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kException",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "expression",
     "named": true,
     "fields": {},
@@ -679,6 +713,44 @@
         },
         {
           "type": "kWith",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "field_spec",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "default_value_part",
+          "named": true
+        },
+        {
+          "type": "kNot",
+          "named": true
+        },
+        {
+          "type": "kNull",
+          "named": true
+        },
+        {
+          "type": "type_spec",
           "named": true
         }
       ]
@@ -2305,6 +2377,52 @@
     }
   },
   {
+    "type": "record_type_def",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "field_spec",
+          "named": true
+        },
+        {
+          "type": "kRecord",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ref_cursor_type_def",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kCursor",
+          "named": true
+        },
+        {
+          "type": "kRef",
+          "named": true
+        },
+        {
+          "type": "kReturn",
+          "named": true
+        },
+        {
+          "type": "type_spec",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "reference_model",
     "named": true,
     "fields": {
@@ -2943,6 +3061,33 @@
     }
   },
   {
+    "type": "table_indexed_by_part",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kBy",
+          "named": true
+        },
+        {
+          "type": "kIndex",
+          "named": true
+        },
+        {
+          "type": "kIndexed",
+          "named": true
+        },
+        {
+          "type": "type_spec",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "table_ref",
     "named": true,
     "fields": {},
@@ -3050,6 +3195,41 @@
     }
   },
   {
+    "type": "table_type_def",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kNot",
+          "named": true
+        },
+        {
+          "type": "kNull",
+          "named": true
+        },
+        {
+          "type": "kOf",
+          "named": true
+        },
+        {
+          "type": "kTable",
+          "named": true
+        },
+        {
+          "type": "table_indexed_by_part",
+          "named": true
+        },
+        {
+          "type": "type_spec",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "tableview_name",
     "named": true,
     "fields": {
@@ -3078,6 +3258,52 @@
         },
         {
           "type": "xmltable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "type_declaration",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kIs",
+          "named": true
+        },
+        {
+          "type": "kType",
+          "named": true
+        },
+        {
+          "type": "record_type_def",
+          "named": true
+        },
+        {
+          "type": "ref_cursor_type_def",
+          "named": true
+        },
+        {
+          "type": "table_type_def",
+          "named": true
+        },
+        {
+          "type": "varray_type_def",
           "named": true
         }
       ]
@@ -3327,6 +3553,49 @@
         },
         {
           "type": "kIntroducer",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "varray_type_def",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kArray",
+          "named": true
+        },
+        {
+          "type": "kNot",
+          "named": true
+        },
+        {
+          "type": "kNull",
+          "named": true
+        },
+        {
+          "type": "kOf",
+          "named": true
+        },
+        {
+          "type": "kVarray",
+          "named": true
+        },
+        {
+          "type": "kVarying",
+          "named": true
+        },
+        {
+          "type": "type_spec",
           "named": true
         }
       ]
@@ -3680,6 +3949,10 @@
     "named": true
   },
   {
+    "type": "kArray",
+    "named": true
+  },
+  {
     "type": "kAs",
     "named": true
   },
@@ -3808,6 +4081,10 @@
     "named": true
   },
   {
+    "type": "kException",
+    "named": true
+  },
+  {
     "type": "kExceptionInit",
     "named": true
   },
@@ -3873,6 +4150,14 @@
   },
   {
     "type": "kInclude",
+    "named": true
+  },
+  {
+    "type": "kIndex",
+    "named": true
+  },
+  {
+    "type": "kIndexed",
     "named": true
   },
   {
@@ -4084,6 +4369,10 @@
     "named": true
   },
   {
+    "type": "kRecord",
+    "named": true
+  },
+  {
     "type": "kRef",
     "named": true
   },
@@ -4277,6 +4566,14 @@
   },
   {
     "type": "kVarchar2",
+    "named": true
+  },
+  {
+    "type": "kVarray",
+    "named": true
+  },
+  {
+    "type": "kVarying",
     "named": true
   },
   {
