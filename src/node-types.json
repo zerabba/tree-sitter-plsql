@@ -1,11 +1,4326 @@
 [
   {
-    "type": "source_file",
+    "type": "argument",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "bind_variable",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cell_assignment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "model_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cell_reference_options",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kDimension",
+          "named": true
+        },
+        {
+          "type": "kIgnore",
+          "named": true
+        },
+        {
+          "type": "kKeep",
+          "named": true
+        },
+        {
+          "type": "kNav",
+          "named": true
+        },
+        {
+          "type": "kReference",
+          "named": true
+        },
+        {
+          "type": "kSingle",
+          "named": true
+        },
+        {
+          "type": "kUnique",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "char",
+    "named": true,
+    "fields": {
+      "size": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "literal",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kChar",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "column_alias",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "kAs",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "column_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "column_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "column_name",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "concatenation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "concatenation",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "condition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "constant",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kDefault",
+          "named": true
+        },
+        {
+          "type": "kFalse",
+          "named": true
+        },
+        {
+          "type": "kNull",
+          "named": true
+        },
+        {
+          "type": "kTrue",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "create_package_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "kAs",
+          "named": true
+        },
+        {
+          "type": "kBody",
+          "named": true
+        },
+        {
+          "type": "kCreate",
+          "named": true
+        },
+        {
+          "type": "kEnd",
+          "named": true
+        },
+        {
+          "type": "kIs",
+          "named": true
+        },
+        {
+          "type": "kOr",
+          "named": true
+        },
+        {
+          "type": "kPackage",
+          "named": true
+        },
+        {
+          "type": "kReplace",
+          "named": true
+        },
+        {
+          "type": "package_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "create_package_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "cursoor_declaration",
+          "named": true
+        },
+        {
+          "type": "function_specification",
+          "named": true
+        },
+        {
+          "type": "kAs",
+          "named": true
+        },
+        {
+          "type": "kCreate",
+          "named": true
+        },
+        {
+          "type": "kEnd",
+          "named": true
+        },
+        {
+          "type": "kIs",
+          "named": true
+        },
+        {
+          "type": "kOr",
+          "named": true
+        },
+        {
+          "type": "kPackage",
+          "named": true
+        },
+        {
+          "type": "kReplace",
+          "named": true
+        },
+        {
+          "type": "package_name",
+          "named": true
+        },
+        {
+          "type": "pragma_declaration",
+          "named": true
+        },
+        {
+          "type": "procedure_specification",
+          "named": true
+        },
+        {
+          "type": "subtype_declaration",
+          "named": true
+        },
+        {
+          "type": "variable_declaration",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "create_synonym",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "kCreate",
+          "named": true
+        },
+        {
+          "type": "kFor",
+          "named": true
+        },
+        {
+          "type": "kOr",
+          "named": true
+        },
+        {
+          "type": "kReplace",
+          "named": true
+        },
+        {
+          "type": "kSynonym",
+          "named": true
+        },
+        {
+          "type": "synonym_target",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cursoor_declaration",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kCursor",
+          "named": true
+        },
+        {
+          "type": "kIs",
+          "named": true
+        },
+        {
+          "type": "parameter_spec",
+          "named": true
+        },
+        {
+          "type": "select_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cursor_name",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "bind_variable",
+          "named": true
+        },
+        {
+          "type": "general_element",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cycle_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "column_list",
+          "named": true
+        },
+        {
+          "type": "column_name",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kCycle",
+          "named": true
+        },
+        {
+          "type": "kDefault",
+          "named": true
+        },
+        {
+          "type": "kSet",
+          "named": true
+        },
+        {
+          "type": "kTo",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "datatype",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "char",
+          "named": true
+        },
+        {
+          "type": "kDate",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "varchar2",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "default_value_part",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kDefault",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "dml_table_expression_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "sample_clause",
+          "named": true
+        },
+        {
+          "type": "select_statement",
+          "named": true
+        },
+        {
+          "type": "subquery_restriction_clause",
+          "named": true
+        },
+        {
+          "type": "table_collection_expression",
+          "named": true
+        },
+        {
+          "type": "tableview_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "expressions_",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "factoring_element",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "cycle_clause",
+          "named": true
+        },
+        {
+          "type": "kAs",
+          "named": true
+        },
+        {
+          "type": "order_by_clause",
+          "named": true
+        },
+        {
+          "type": "paren_column_list",
+          "named": true
+        },
+        {
+          "type": "search_clause",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fetch_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kFetch",
+          "named": true
+        },
+        {
+          "type": "kFirst",
+          "named": true
+        },
+        {
+          "type": "kNext",
+          "named": true
+        },
+        {
+          "type": "kOnly",
+          "named": true
+        },
+        {
+          "type": "kPercent",
+          "named": true
+        },
+        {
+          "type": "kRow",
+          "named": true
+        },
+        {
+          "type": "kRows",
+          "named": true
+        },
+        {
+          "type": "kTies",
+          "named": true
+        },
+        {
+          "type": "kWith",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flashback_query_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kAs",
+          "named": true
+        },
+        {
+          "type": "kBetween",
+          "named": true
+        },
+        {
+          "type": "kOf",
+          "named": true
+        },
+        {
+          "type": "kScn",
+          "named": true
+        },
+        {
+          "type": "kSnapshot",
+          "named": true
+        },
+        {
+          "type": "kTimestamp",
+          "named": true
+        },
+        {
+          "type": "kVersions",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_update_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "for_update_of_part",
+          "named": true
+        },
+        {
+          "type": "for_update_options",
+          "named": true
+        },
+        {
+          "type": "kFor",
+          "named": true
+        },
+        {
+          "type": "kUpdate",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_update_of_part",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "column_list",
+          "named": true
+        },
+        {
+          "type": "kOf",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_update_options",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kLocked",
+          "named": true
+        },
+        {
+          "type": "kNowait",
+          "named": true
+        },
+        {
+          "type": "kSkip",
+          "named": true
+        },
+        {
+          "type": "kWait",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "from_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kFrom",
+          "named": true
+        },
+        {
+          "type": "table_ref_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function_argument",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "argument",
+          "named": true
+        },
+        {
+          "type": "keep_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function_specification",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kDeterministic",
+          "named": true
+        },
+        {
+          "type": "kFunction",
+          "named": true
+        },
+        {
+          "type": "kPipelined",
+          "named": true
+        },
+        {
+          "type": "kResultCache",
+          "named": true
+        },
+        {
+          "type": "parameter_list",
+          "named": true
+        },
+        {
+          "type": "return_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "general_element",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "general_element_part",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "general_element_part",
+    "named": true,
+    "fields": {
+      "char_set_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "link_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "function_argument",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "kIntroducer",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "group_by_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "group_by_elements",
+          "named": true
+        },
+        {
+          "type": "having_clause",
+          "named": true
+        },
+        {
+          "type": "kBy",
+          "named": true
+        },
+        {
+          "type": "kGroup",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "group_by_elements",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "grouping_sets_clause",
+          "named": true
+        },
+        {
+          "type": "rollup_cube_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "grouping_sets_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "grouping_sets_elements",
+          "named": true
+        },
+        {
+          "type": "kGrouping",
+          "named": true
+        },
+        {
+          "type": "kSets",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "grouping_sets_elements",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "expressions_",
+          "named": true
+        },
+        {
+          "type": "rollup_cube_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "having_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "condition",
+          "named": true
+        },
+        {
+          "type": "kHaving",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "hierarchical_query_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "condition",
+          "named": true
+        },
+        {
+          "type": "kBy",
+          "named": true
+        },
+        {
+          "type": "kConnect",
+          "named": true
+        },
+        {
+          "type": "kNoCycle",
+          "named": true
+        },
+        {
+          "type": "start_part",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "identifier",
     "named": true,
     "fields": {}
   },
   {
-    "type": "hello",
+    "type": "into_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kBulk",
+          "named": true
+        },
+        {
+          "type": "kCollect",
+          "named": true
+        },
+        {
+          "type": "kInto",
+          "named": true
+        },
+        {
+          "type": "variable_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "join_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "join_on_part",
+          "named": true
+        },
+        {
+          "type": "join_using_part",
+          "named": true
+        },
+        {
+          "type": "kCross",
+          "named": true
+        },
+        {
+          "type": "kInner",
+          "named": true
+        },
+        {
+          "type": "kJoin",
+          "named": true
+        },
+        {
+          "type": "kNatural",
+          "named": true
+        },
+        {
+          "type": "outer_join_type",
+          "named": true
+        },
+        {
+          "type": "query_partition_clause",
+          "named": true
+        },
+        {
+          "type": "table_ref_aux",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "join_on_part",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "condition",
+          "named": true
+        },
+        {
+          "type": "kOn",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "join_using_part",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kUsing",
+          "named": true
+        },
+        {
+          "type": "paren_column_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "keep_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kDenseRank",
+          "named": true
+        },
+        {
+          "type": "kFirst",
+          "named": true
+        },
+        {
+          "type": "kKeep",
+          "named": true
+        },
+        {
+          "type": "kLast",
+          "named": true
+        },
+        {
+          "type": "order_by_clause",
+          "named": true
+        },
+        {
+          "type": "over_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "kFalse",
+          "named": true
+        },
+        {
+          "type": "kNull",
+          "named": true
+        },
+        {
+          "type": "kTrue",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "main_model",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "cell_reference_options",
+          "named": true
+        },
+        {
+          "type": "kMain",
+          "named": true
+        },
+        {
+          "type": "model_column_clauses",
+          "named": true
+        },
+        {
+          "type": "model_rules_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "model_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "cell_reference_options",
+          "named": true
+        },
+        {
+          "type": "kModel",
+          "named": true
+        },
+        {
+          "type": "main_model",
+          "named": true
+        },
+        {
+          "type": "reference_model",
+          "named": true
+        },
+        {
+          "type": "return_rows_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "model_column",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "column_alias",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "query_block",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "model_column_clauses",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kBy",
+          "named": true
+        },
+        {
+          "type": "kDimension",
+          "named": true
+        },
+        {
+          "type": "kMeasures",
+          "named": true
+        },
+        {
+          "type": "model_column_partition_part",
+          "named": true
+        },
+        {
+          "type": "model_colun_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "model_column_partition_part",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kBy",
+          "named": true
+        },
+        {
+          "type": "kPartition",
+          "named": true
+        },
+        {
+          "type": "model_colun_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "model_colun_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "model_column",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "model_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "model_expression_element",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "model_expression_element",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kAny",
+          "named": true
+        },
+        {
+          "type": "multi_column_for_loop",
+          "named": true
+        },
+        {
+          "type": "single_column_for_loop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "model_iterate_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kIterate",
+          "named": true
+        },
+        {
+          "type": "until_part",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "model_rules_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "model_rules_element",
+          "named": true
+        },
+        {
+          "type": "model_rules_part",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "model_rules_element",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "cell_assignment",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kAll",
+          "named": true
+        },
+        {
+          "type": "kUpdate",
+          "named": true
+        },
+        {
+          "type": "kUpsert",
+          "named": true
+        },
+        {
+          "type": "order_by_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "model_rules_part",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kAll",
+          "named": true
+        },
+        {
+          "type": "kAutomatic",
+          "named": true
+        },
+        {
+          "type": "kOrder",
+          "named": true
+        },
+        {
+          "type": "kRules",
+          "named": true
+        },
+        {
+          "type": "kSequential",
+          "named": true
+        },
+        {
+          "type": "kUpdate",
+          "named": true
+        },
+        {
+          "type": "kUpsert",
+          "named": true
+        },
+        {
+          "type": "model_iterate_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "multi_column_for_loop",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expressions_",
+          "named": true
+        },
+        {
+          "type": "kFor",
+          "named": true
+        },
+        {
+          "type": "kIn",
+          "named": true
+        },
+        {
+          "type": "paren_column_list",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "number",
+    "named": true,
+    "fields": {
+      "precision": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "literal",
+            "named": true
+          }
+        ]
+      },
+      "scale": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "literal",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kNumber",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "offset_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kOffset",
+          "named": true
+        },
+        {
+          "type": "kRow",
+          "named": true
+        },
+        {
+          "type": "kRows",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "order_by_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kBy",
+          "named": true
+        },
+        {
+          "type": "kOrder",
+          "named": true
+        },
+        {
+          "type": "kSiblings",
+          "named": true
+        },
+        {
+          "type": "order_by_elements",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "order_by_elements",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kAsc",
+          "named": true
+        },
+        {
+          "type": "kDesc",
+          "named": true
+        },
+        {
+          "type": "kFirst",
+          "named": true
+        },
+        {
+          "type": "kLast",
+          "named": true
+        },
+        {
+          "type": "kNulls",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "outer_join_sign",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "outer_join_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kFull",
+          "named": true
+        },
+        {
+          "type": "kLeft",
+          "named": true
+        },
+        {
+          "type": "kOuter",
+          "named": true
+        },
+        {
+          "type": "kRight",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "over_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kOver",
+          "named": true
+        },
+        {
+          "type": "order_by_clause",
+          "named": true
+        },
+        {
+          "type": "query_partition_clause",
+          "named": true
+        },
+        {
+          "type": "windowing_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "package_name",
+    "named": true,
+    "fields": {
+      "schema": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parameter",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "default_value_part",
+          "named": true
+        },
+        {
+          "type": "kIn",
+          "named": true
+        },
+        {
+          "type": "kInOut",
+          "named": true
+        },
+        {
+          "type": "kNoCopy",
+          "named": true
+        },
+        {
+          "type": "kOut",
+          "named": true
+        },
+        {
+          "type": "type_spec",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parameter_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "parameter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parameter_spec",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "default_value_part",
+          "named": true
+        },
+        {
+          "type": "kIn",
+          "named": true
+        },
+        {
+          "type": "type_spec",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "paren_column_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "column_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pivot_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kPivot",
+          "named": true
+        },
+        {
+          "type": "kXml",
+          "named": true
+        },
+        {
+          "type": "pivot_element",
+          "named": true
+        },
+        {
+          "type": "pivot_for_clause",
+          "named": true
+        },
+        {
+          "type": "pivot_in_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pivot_element",
+    "named": true,
+    "fields": {
+      "aggregate_function_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "column_alias",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pivot_for_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "column_name",
+          "named": true
+        },
+        {
+          "type": "kFor",
+          "named": true
+        },
+        {
+          "type": "paren_column_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pivot_in_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kAny",
+          "named": true
+        },
+        {
+          "type": "kIn",
+          "named": true
+        },
+        {
+          "type": "pivot_in_clause_element",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pivot_in_clause_element",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "column_alias",
+          "named": true
+        },
+        {
+          "type": "pivot_in_clause_elements",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pivot_in_clause_elements",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "expressions_",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pragma_declaration",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kAutonomousTransaction",
+          "named": true
+        },
+        {
+          "type": "kExceptionInit",
+          "named": true
+        },
+        {
+          "type": "kInline",
+          "named": true
+        },
+        {
+          "type": "kPragma",
+          "named": true
+        },
+        {
+          "type": "kRNDS",
+          "named": true
+        },
+        {
+          "type": "kRNPS",
+          "named": true
+        },
+        {
+          "type": "kRestrictReferences",
+          "named": true
+        },
+        {
+          "type": "kSeriallyReusable",
+          "named": true
+        },
+        {
+          "type": "kStrNo",
+          "named": true
+        },
+        {
+          "type": "kStrYes",
+          "named": true
+        },
+        {
+          "type": "kTRUST",
+          "named": true
+        },
+        {
+          "type": "kWNDS",
+          "named": true
+        },
+        {
+          "type": "kWNPS",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "procedure_specification",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kProcedure",
+          "named": true
+        },
+        {
+          "type": "parameter_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "program",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "query_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "fetch_clause",
+          "named": true
+        },
+        {
+          "type": "from_clause",
+          "named": true
+        },
+        {
+          "type": "group_by_clause",
+          "named": true
+        },
+        {
+          "type": "hierarchical_query_clause",
+          "named": true
+        },
+        {
+          "type": "into_clause",
+          "named": true
+        },
+        {
+          "type": "kAll",
+          "named": true
+        },
+        {
+          "type": "kDistinct",
+          "named": true
+        },
+        {
+          "type": "kSelect",
+          "named": true
+        },
+        {
+          "type": "kUnique",
+          "named": true
+        },
+        {
+          "type": "model_clause",
+          "named": true
+        },
+        {
+          "type": "order_by_clause",
+          "named": true
+        },
+        {
+          "type": "select_list",
+          "named": true
+        },
+        {
+          "type": "where_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "query_partition_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expressions_",
+          "named": true
+        },
+        {
+          "type": "kBy",
+          "named": true
+        },
+        {
+          "type": "kPartition",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "reference_model",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "cell_reference_options",
+          "named": true
+        },
+        {
+          "type": "kOn",
+          "named": true
+        },
+        {
+          "type": "kReference",
+          "named": true
+        },
+        {
+          "type": "model_column_clauses",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "return_rows_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kAll",
+          "named": true
+        },
+        {
+          "type": "kReturn",
+          "named": true
+        },
+        {
+          "type": "kRows",
+          "named": true
+        },
+        {
+          "type": "kUpdated",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "return_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kReturn",
+          "named": true
+        },
+        {
+          "type": "type_spec",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "rollup_cube_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "grouping_sets_elements",
+          "named": true
+        },
+        {
+          "type": "kCube",
+          "named": true
+        },
+        {
+          "type": "kRollup",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sample_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kBlock",
+          "named": true
+        },
+        {
+          "type": "kSample",
+          "named": true
+        },
+        {
+          "type": "seed_part",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "search_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "column_name",
+          "named": true
+        },
+        {
+          "type": "kBreadth",
+          "named": true
+        },
+        {
+          "type": "kBy",
+          "named": true
+        },
+        {
+          "type": "kDepth",
+          "named": true
+        },
+        {
+          "type": "kFirst",
+          "named": true
+        },
+        {
+          "type": "kSearch",
+          "named": true
+        },
+        {
+          "type": "kSet",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "seed_part",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kSeed",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "select_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "select_list_elements",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "select_list_elements",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "column_alias",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "tableview_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "select_only_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "subquery",
+          "named": true
+        },
+        {
+          "type": "subquery_factoring_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "select_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "fetch_clause",
+          "named": true
+        },
+        {
+          "type": "for_update_clause",
+          "named": true
+        },
+        {
+          "type": "offset_clause",
+          "named": true
+        },
+        {
+          "type": "order_by_clause",
+          "named": true
+        },
+        {
+          "type": "select_only_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "single_column_for_loop",
+    "named": true,
+    "fields": {
+      "action_expr": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "from_expr": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "to_expr": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "column_name",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "expressions_",
+          "named": true
+        },
+        {
+          "type": "kFor",
+          "named": true
+        },
+        {
+          "type": "kFrom",
+          "named": true
+        },
+        {
+          "type": "kIn",
+          "named": true
+        },
+        {
+          "type": "kLike",
+          "named": true
+        },
+        {
+          "type": "kTo",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "start_part",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "condition",
+          "named": true
+        },
+        {
+          "type": "kStart",
+          "named": true
+        },
+        {
+          "type": "kWith",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "create_package_body",
+          "named": true
+        },
+        {
+          "type": "create_package_header",
+          "named": true
+        },
+        {
+          "type": "create_synonym",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "subquery",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "subquery_basic_elements",
+          "named": true
+        },
+        {
+          "type": "subquery_operation_part",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "subquery_basic_elements",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "query_block",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "subquery_factoring_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "factoring_element",
+          "named": true
+        },
+        {
+          "type": "kWith",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "subquery_operation_part",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kAll",
+          "named": true
+        },
+        {
+          "type": "kIntersect",
+          "named": true
+        },
+        {
+          "type": "kMinus",
+          "named": true
+        },
+        {
+          "type": "kUnion",
+          "named": true
+        },
+        {
+          "type": "subquery_basic_elements",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "subquery_restriction_clause",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kCheck",
+          "named": true
+        },
+        {
+          "type": "kConstraint",
+          "named": true
+        },
+        {
+          "type": "kOnly",
+          "named": true
+        },
+        {
+          "type": "kOption",
+          "named": true
+        },
+        {
+          "type": "kRead",
+          "named": true
+        },
+        {
+          "type": "kWith",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "subtype_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "kIs",
+          "named": true
+        },
+        {
+          "type": "kNot",
+          "named": true
+        },
+        {
+          "type": "kNull",
+          "named": true
+        },
+        {
+          "type": "kRange",
+          "named": true
+        },
+        {
+          "type": "kSubType",
+          "named": true
+        },
+        {
+          "type": "type_spec",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "synonym_target",
+    "named": true,
+    "fields": {
+      "schema": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "table_collection_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kTable",
+          "named": true
+        },
+        {
+          "type": "kThe",
+          "named": true
+        },
+        {
+          "type": "outer_join_sign",
+          "named": true
+        },
+        {
+          "type": "subquery",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "table_ref",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "join_clause",
+          "named": true
+        },
+        {
+          "type": "pivot_clause",
+          "named": true
+        },
+        {
+          "type": "table_ref_aux",
+          "named": true
+        },
+        {
+          "type": "unpivot_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "table_ref_aux",
+    "named": true,
+    "fields": {
+      "table_alias": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "flashback_query_clause",
+          "named": true
+        },
+        {
+          "type": "table_ref_aux_internal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "table_ref_aux_internal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "dml_table_expression_clause",
+          "named": true
+        },
+        {
+          "type": "kOnly",
+          "named": true
+        },
+        {
+          "type": "pivot_clause",
+          "named": true
+        },
+        {
+          "type": "subquery_operation_part",
+          "named": true
+        },
+        {
+          "type": "table_ref",
+          "named": true
+        },
+        {
+          "type": "unpivot_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "table_ref_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "table_ref",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tableview_name",
+    "named": true,
+    "fields": {
+      "link_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "outer_join_sign",
+          "named": true
+        },
+        {
+          "type": "xmltable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "type_spec",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "datatype",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "kRef",
+          "named": true
+        },
+        {
+          "type": "kRowType",
+          "named": true
+        },
+        {
+          "type": "kType",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unary_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unpivot_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "column_name",
+          "named": true
+        },
+        {
+          "type": "kExclude",
+          "named": true
+        },
+        {
+          "type": "kInclude",
+          "named": true
+        },
+        {
+          "type": "kNulls",
+          "named": true
+        },
+        {
+          "type": "kUnpivot",
+          "named": true
+        },
+        {
+          "type": "paren_column_list",
+          "named": true
+        },
+        {
+          "type": "pivot_for_clause",
+          "named": true
+        },
+        {
+          "type": "unpivot_in_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unpivot_in_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kIn",
+          "named": true
+        },
+        {
+          "type": "unpivot_in_elements",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unpivot_in_elements",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "column_name",
+          "named": true
+        },
+        {
+          "type": "constant",
+          "named": true
+        },
+        {
+          "type": "kAs",
+          "named": true
+        },
+        {
+          "type": "paren_column_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "until_part",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "condition",
+          "named": true
+        },
+        {
+          "type": "kUntil",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "varchar2",
+    "named": true,
+    "fields": {
+      "size": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "literal",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kVarchar2",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variable_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "default_value_part",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "kConstant",
+          "named": true
+        },
+        {
+          "type": "kNot",
+          "named": true
+        },
+        {
+          "type": "kNull",
+          "named": true
+        },
+        {
+          "type": "type_spec",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variable_name",
+    "named": true,
+    "fields": {
+      "char_set_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bind_variable",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "kIntroducer",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "where_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "cursor_name",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kCurrent",
+          "named": true
+        },
+        {
+          "type": "kOf",
+          "named": true
+        },
+        {
+          "type": "kWhere",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "windowing_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kAnd",
+          "named": true
+        },
+        {
+          "type": "kBetween",
+          "named": true
+        },
+        {
+          "type": "kRange",
+          "named": true
+        },
+        {
+          "type": "kRows",
+          "named": true
+        },
+        {
+          "type": "windowing_elements",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "windowing_elements",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "concatenation",
+          "named": true
+        },
+        {
+          "type": "kCurrent",
+          "named": true
+        },
+        {
+          "type": "kFollowing",
+          "named": true
+        },
+        {
+          "type": "kPreceding",
+          "named": true
+        },
+        {
+          "type": "kRow",
+          "named": true
+        },
+        {
+          "type": "kUnbounded",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "xml_general_default_part",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "concatenation",
+          "named": true
+        },
+        {
+          "type": "kDefault",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "xml_namespace_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "column_alias",
+          "named": true
+        },
+        {
+          "type": "concatenation",
+          "named": true
+        },
+        {
+          "type": "kXmlNamespaces",
+          "named": true
+        },
+        {
+          "type": "xml_general_default_part",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "xml_passing_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "column_alias",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kBy",
+          "named": true
+        },
+        {
+          "type": "kPassing",
+          "named": true
+        },
+        {
+          "type": "kValue",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "xml_table_column",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "concatenation",
+          "named": true
+        },
+        {
+          "type": "kFor",
+          "named": true
+        },
+        {
+          "type": "kOrdinality",
+          "named": true
+        },
+        {
+          "type": "kPath",
+          "named": true
+        },
+        {
+          "type": "type_spec",
+          "named": true
+        },
+        {
+          "type": "xml_general_default_part",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "xmltable",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "concatenation",
+          "named": true
+        },
+        {
+          "type": "general_element_part",
+          "named": true
+        },
+        {
+          "type": "kColumns",
+          "named": true
+        },
+        {
+          "type": "kXmlTable",
+          "named": true
+        },
+        {
+          "type": "xml_namespace_clause",
+          "named": true
+        },
+        {
+          "type": "xml_passing_clause",
+          "named": true
+        },
+        {
+          "type": "xml_table_column",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "%",
+    "named": false
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": "+",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": "-",
+    "named": false
+  },
+  {
+    "type": ".",
+    "named": false
+  },
+  {
+    "type": "..",
+    "named": false
+  },
+  {
+    "type": "/",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
+    "type": ":=",
+    "named": false
+  },
+  {
+    "type": ";",
+    "named": false
+  },
+  {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": ">",
+    "named": false
+  },
+  {
+    "type": "@",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
+    "type": "comment",
+    "named": true
+  },
+  {
+    "type": "kAll",
+    "named": true
+  },
+  {
+    "type": "kAnd",
+    "named": true
+  },
+  {
+    "type": "kAny",
+    "named": true
+  },
+  {
+    "type": "kAs",
+    "named": true
+  },
+  {
+    "type": "kAsc",
+    "named": true
+  },
+  {
+    "type": "kAutomatic",
+    "named": true
+  },
+  {
+    "type": "kAutonomousTransaction",
+    "named": true
+  },
+  {
+    "type": "kBetween",
+    "named": true
+  },
+  {
+    "type": "kBlock",
+    "named": true
+  },
+  {
+    "type": "kBody",
+    "named": true
+  },
+  {
+    "type": "kBreadth",
+    "named": true
+  },
+  {
+    "type": "kBulk",
+    "named": true
+  },
+  {
+    "type": "kBy",
+    "named": true
+  },
+  {
+    "type": "kChar",
+    "named": true
+  },
+  {
+    "type": "kCheck",
+    "named": true
+  },
+  {
+    "type": "kCollect",
+    "named": true
+  },
+  {
+    "type": "kColumns",
+    "named": true
+  },
+  {
+    "type": "kConnect",
+    "named": true
+  },
+  {
+    "type": "kConstant",
+    "named": true
+  },
+  {
+    "type": "kConstraint",
+    "named": true
+  },
+  {
+    "type": "kCreate",
+    "named": true
+  },
+  {
+    "type": "kCross",
+    "named": true
+  },
+  {
+    "type": "kCube",
+    "named": true
+  },
+  {
+    "type": "kCurrent",
+    "named": true
+  },
+  {
+    "type": "kCursor",
+    "named": true
+  },
+  {
+    "type": "kCycle",
+    "named": true
+  },
+  {
+    "type": "kDate",
+    "named": true
+  },
+  {
+    "type": "kDefault",
+    "named": true
+  },
+  {
+    "type": "kDenseRank",
+    "named": true
+  },
+  {
+    "type": "kDepth",
+    "named": true
+  },
+  {
+    "type": "kDesc",
+    "named": true
+  },
+  {
+    "type": "kDeterministic",
+    "named": true
+  },
+  {
+    "type": "kDimension",
+    "named": true
+  },
+  {
+    "type": "kDistinct",
+    "named": true
+  },
+  {
+    "type": "kEnd",
+    "named": true
+  },
+  {
+    "type": "kExceptionInit",
+    "named": true
+  },
+  {
+    "type": "kExclude",
+    "named": true
+  },
+  {
+    "type": "kFalse",
+    "named": true
+  },
+  {
+    "type": "kFetch",
+    "named": true
+  },
+  {
+    "type": "kFirst",
+    "named": true
+  },
+  {
+    "type": "kFollowing",
+    "named": true
+  },
+  {
+    "type": "kFor",
+    "named": true
+  },
+  {
+    "type": "kFrom",
+    "named": true
+  },
+  {
+    "type": "kFull",
+    "named": true
+  },
+  {
+    "type": "kFunction",
+    "named": true
+  },
+  {
+    "type": "kGroup",
+    "named": true
+  },
+  {
+    "type": "kGrouping",
+    "named": true
+  },
+  {
+    "type": "kHaving",
+    "named": true
+  },
+  {
+    "type": "kIgnore",
+    "named": true
+  },
+  {
+    "type": "kIn",
+    "named": true
+  },
+  {
+    "type": "kInOut",
+    "named": true
+  },
+  {
+    "type": "kInclude",
+    "named": true
+  },
+  {
+    "type": "kInline",
+    "named": true
+  },
+  {
+    "type": "kInner",
+    "named": true
+  },
+  {
+    "type": "kIntersect",
+    "named": true
+  },
+  {
+    "type": "kInto",
+    "named": true
+  },
+  {
+    "type": "kIntroducer",
+    "named": true
+  },
+  {
+    "type": "kIs",
+    "named": true
+  },
+  {
+    "type": "kIterate",
+    "named": true
+  },
+  {
+    "type": "kJoin",
+    "named": true
+  },
+  {
+    "type": "kKeep",
+    "named": true
+  },
+  {
+    "type": "kLast",
+    "named": true
+  },
+  {
+    "type": "kLeft",
+    "named": true
+  },
+  {
+    "type": "kLike",
+    "named": true
+  },
+  {
+    "type": "kLocked",
+    "named": true
+  },
+  {
+    "type": "kMain",
+    "named": true
+  },
+  {
+    "type": "kMeasures",
+    "named": true
+  },
+  {
+    "type": "kMinus",
+    "named": true
+  },
+  {
+    "type": "kModel",
+    "named": true
+  },
+  {
+    "type": "kNatural",
+    "named": true
+  },
+  {
+    "type": "kNav",
+    "named": true
+  },
+  {
+    "type": "kNext",
+    "named": true
+  },
+  {
+    "type": "kNoCopy",
+    "named": true
+  },
+  {
+    "type": "kNoCycle",
+    "named": true
+  },
+  {
+    "type": "kNot",
+    "named": true
+  },
+  {
+    "type": "kNowait",
+    "named": true
+  },
+  {
+    "type": "kNull",
+    "named": true
+  },
+  {
+    "type": "kNulls",
+    "named": true
+  },
+  {
+    "type": "kNumber",
+    "named": true
+  },
+  {
+    "type": "kOf",
+    "named": true
+  },
+  {
+    "type": "kOffset",
+    "named": true
+  },
+  {
+    "type": "kOn",
+    "named": true
+  },
+  {
+    "type": "kOnly",
+    "named": true
+  },
+  {
+    "type": "kOption",
+    "named": true
+  },
+  {
+    "type": "kOr",
+    "named": true
+  },
+  {
+    "type": "kOrder",
+    "named": true
+  },
+  {
+    "type": "kOrdinality",
+    "named": true
+  },
+  {
+    "type": "kOut",
+    "named": true
+  },
+  {
+    "type": "kOuter",
+    "named": true
+  },
+  {
+    "type": "kOver",
+    "named": true
+  },
+  {
+    "type": "kPackage",
+    "named": true
+  },
+  {
+    "type": "kPartition",
+    "named": true
+  },
+  {
+    "type": "kPassing",
+    "named": true
+  },
+  {
+    "type": "kPath",
+    "named": true
+  },
+  {
+    "type": "kPercent",
+    "named": true
+  },
+  {
+    "type": "kPipelined",
+    "named": true
+  },
+  {
+    "type": "kPivot",
+    "named": true
+  },
+  {
+    "type": "kPragma",
+    "named": true
+  },
+  {
+    "type": "kPreceding",
+    "named": true
+  },
+  {
+    "type": "kProcedure",
+    "named": true
+  },
+  {
+    "type": "kRNDS",
+    "named": true
+  },
+  {
+    "type": "kRNPS",
+    "named": true
+  },
+  {
+    "type": "kRange",
+    "named": true
+  },
+  {
+    "type": "kRead",
+    "named": true
+  },
+  {
+    "type": "kRef",
+    "named": true
+  },
+  {
+    "type": "kReference",
+    "named": true
+  },
+  {
+    "type": "kReplace",
+    "named": true
+  },
+  {
+    "type": "kRestrictReferences",
+    "named": true
+  },
+  {
+    "type": "kResultCache",
+    "named": true
+  },
+  {
+    "type": "kReturn",
+    "named": true
+  },
+  {
+    "type": "kRight",
+    "named": true
+  },
+  {
+    "type": "kRollup",
+    "named": true
+  },
+  {
+    "type": "kRow",
+    "named": true
+  },
+  {
+    "type": "kRowType",
+    "named": true
+  },
+  {
+    "type": "kRows",
+    "named": true
+  },
+  {
+    "type": "kRules",
+    "named": true
+  },
+  {
+    "type": "kSample",
+    "named": true
+  },
+  {
+    "type": "kScn",
+    "named": true
+  },
+  {
+    "type": "kSearch",
+    "named": true
+  },
+  {
+    "type": "kSeed",
+    "named": true
+  },
+  {
+    "type": "kSelect",
+    "named": true
+  },
+  {
+    "type": "kSequential",
+    "named": true
+  },
+  {
+    "type": "kSeriallyReusable",
+    "named": true
+  },
+  {
+    "type": "kSet",
+    "named": true
+  },
+  {
+    "type": "kSets",
+    "named": true
+  },
+  {
+    "type": "kSiblings",
+    "named": true
+  },
+  {
+    "type": "kSingle",
+    "named": true
+  },
+  {
+    "type": "kSkip",
+    "named": true
+  },
+  {
+    "type": "kSnapshot",
+    "named": true
+  },
+  {
+    "type": "kStart",
+    "named": true
+  },
+  {
+    "type": "kStrNo",
+    "named": true
+  },
+  {
+    "type": "kStrYes",
+    "named": true
+  },
+  {
+    "type": "kSubType",
+    "named": true
+  },
+  {
+    "type": "kSynonym",
+    "named": true
+  },
+  {
+    "type": "kTRUST",
+    "named": true
+  },
+  {
+    "type": "kTable",
+    "named": true
+  },
+  {
+    "type": "kThe",
+    "named": true
+  },
+  {
+    "type": "kTies",
+    "named": true
+  },
+  {
+    "type": "kTimestamp",
+    "named": true
+  },
+  {
+    "type": "kTo",
+    "named": true
+  },
+  {
+    "type": "kTrue",
+    "named": true
+  },
+  {
+    "type": "kType",
+    "named": true
+  },
+  {
+    "type": "kUnbounded",
+    "named": true
+  },
+  {
+    "type": "kUnion",
+    "named": true
+  },
+  {
+    "type": "kUnique",
+    "named": true
+  },
+  {
+    "type": "kUnpivot",
+    "named": true
+  },
+  {
+    "type": "kUntil",
+    "named": true
+  },
+  {
+    "type": "kUpdate",
+    "named": true
+  },
+  {
+    "type": "kUpdated",
+    "named": true
+  },
+  {
+    "type": "kUpsert",
+    "named": true
+  },
+  {
+    "type": "kUsing",
+    "named": true
+  },
+  {
+    "type": "kValue",
+    "named": true
+  },
+  {
+    "type": "kVarchar2",
+    "named": true
+  },
+  {
+    "type": "kVersions",
+    "named": true
+  },
+  {
+    "type": "kWNDS",
+    "named": true
+  },
+  {
+    "type": "kWNPS",
+    "named": true
+  },
+  {
+    "type": "kWait",
+    "named": true
+  },
+  {
+    "type": "kWhere",
+    "named": true
+  },
+  {
+    "type": "kWith",
+    "named": true
+  },
+  {
+    "type": "kXml",
+    "named": true
+  },
+  {
+    "type": "kXmlNamespaces",
+    "named": true
+  },
+  {
+    "type": "kXmlTable",
+    "named": true
+  },
+  {
+    "type": "marginalia",
+    "named": true
+  },
+  {
+    "type": "||",
     "named": false
   }
 ]

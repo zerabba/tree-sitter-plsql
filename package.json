@@ -2,7 +2,7 @@
   "name": "tree-sitter-plsql",
   "version": "1.0.0",
   "description": "tree-sitter for plsql language",
-  "main": "index.js",
+  "main": "bindings/node",
   "types": "bindings/node",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
