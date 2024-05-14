@@ -15,7 +15,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "statement"
+                    "name": "unit_statement"
                   }
                 ]
               },
@@ -31,7 +31,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "statement"
+              "name": "unit_statement"
             },
             {
               "type": "BLANK"
@@ -40,16 +40,7 @@
         }
       ]
     },
-    "statement": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_ddl_statement"
-        }
-      ]
-    },
-    "_ddl_statement": {
+    "unit_statement": {
       "type": "CHOICE",
       "members": [
         {
@@ -63,6 +54,28 @@
         {
           "type": "SYMBOL",
           "name": "create_synonym"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "data_manipulation_language_statements"
+        }
+      ]
+    },
+    "sql_statement": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "data_manipulation_language_statements"
+        }
+      ]
+    },
+    "data_manipulation_language_statements": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "select_statement"
         }
       ]
     },
@@ -125,7 +138,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "cursoor_declaration"
+                "name": "cursor_declaration"
               },
               {
                 "type": "SYMBOL",
@@ -716,6 +729,134 @@
         }
       ]
     },
+    "seq_of_statements": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "statement"
+              },
+              {
+                "type": "STRING",
+                "value": ";"
+              }
+            ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "label_declaration"
+          }
+        ]
+      }
+    },
+    "label_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "<"
+        },
+        {
+          "type": "STRING",
+          "value": "<"
+        },
+        {
+          "type": "FIELD",
+          "name": "label_name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ">"
+        },
+        {
+          "type": "STRING",
+          "value": ">"
+        }
+      ]
+    },
+    "statement": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "body"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "sql_statement"
+        }
+      ]
+    },
+    "seq_of_declare_specs": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "declare_spec"
+      }
+    },
+    "declare_spec": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "pragma_declaration"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "variable_declaration"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "subtype_declaration"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "cursor_declaration"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "exception_declaration"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "type_declaration"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "procedure_specification"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "function_specification"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "procedure_body"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "function_body"
+            }
+          ]
+        }
+      ]
+    },
     "variable_declaration": {
       "type": "SEQ",
       "members": [
@@ -1152,7 +1293,7 @@
         }
       ]
     },
-    "cursoor_declaration": {
+    "cursor_declaration": {
       "type": "SEQ",
       "members": [
         {
@@ -4592,6 +4733,223 @@
         "name": "identifier"
       }
     },
+    "invoker_rights_clause": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kAuthId"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kCurrentUser"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "kDefiner"
+            }
+          ]
+        }
+      ]
+    },
+    "call_spec": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kLanguage"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "java_spec"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "c_spec"
+            }
+          ]
+        }
+      ]
+    },
+    "java_spec": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kJava"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kName"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_single_quote_string"
+          }
+        }
+      ]
+    },
+    "c_spec": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kC"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "kName"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "name",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_single_quote_string"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kLibrary"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "c_agent_in_clause"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "kWith"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "kContext"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "c_parameters_clause"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "c_agent_in_clause": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kAgent"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kIn"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "SYMBOL",
+              "name": "expressions_"
+            },
+            {
+              "type": "STRING",
+              "value": ")"
+            }
+          ]
+        }
+      ]
+    },
+    "c_parameters_clause": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kParameter"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "expressions_"
+                },
+                {
+                  "type": "STRING",
+                  "value": "..."
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": ")"
+            }
+          ]
+        }
+      ]
+    },
     "parameter_spec": {
       "type": "SEQ",
       "members": [
@@ -5873,20 +6231,509 @@
       "type": "CHOICE",
       "members": [
         {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "native_datatype_element"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "precision_part"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "kWith"
+                        },
+                        {
+                          "type": "CHOICE",
+                          "members": [
+                            {
+                              "type": "SYMBOL",
+                              "name": "kLocal"
+                            },
+                            {
+                              "type": "BLANK"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "kTime"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "kZone"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "kCharacter"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "kSet"
+                        },
+                        {
+                          "type": "FIELD",
+                          "name": "char_set_name",
+                          "content": {
+                            "type": "SYMBOL",
+                            "name": "identifier"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kInterval"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "kYear"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "kDay"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "("
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "expression"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": ")"
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "kTo"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "kMonth"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "kSecond"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "("
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "expression"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": ")"
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "precision_part": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_natural_number"
+            },
+            {
+              "type": "STRING",
+              "value": "*"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_natural_number"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "*"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "kChar"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "kByte"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "native_datatype_element": {
+      "type": "CHOICE",
+      "members": [
+        {
           "type": "SYMBOL",
-          "name": "char"
+          "name": "kBinaryInteger"
         },
         {
           "type": "SYMBOL",
-          "name": "varchar2"
+          "name": "kNatural"
         },
         {
           "type": "SYMBOL",
-          "name": "number"
+          "name": "kBinaryFloat"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kBinaryDouble"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kNaturaln"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kPositive"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kPositiven"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kSigntype"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kSimpleInteger"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kNvarchar2"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kDec"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kInteger"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kInt"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kNumeric"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kSmallint"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kNumber"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kDecimal"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kDouble"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "kPrecision"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kFloat"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kReal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kNchar"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kLong"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "kRaw"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kChar"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kCharacter"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kVarchar2"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kVarchar"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kString"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kRaw"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kBoolean"
         },
         {
           "type": "SYMBOL",
           "name": "kDate"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kRowid"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kUrowid"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kYear"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kMonth"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kDay"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kHour"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kMinute"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kSecond"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kTimezoneHour"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kTimezoneMinute"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kTimezoneRegion"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kTimezoneAbbr"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kTimestamp"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kTimestampUnconstrained"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kTimestampTzUnconstrained"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kTimestampLtzUnconstrained"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kYmintervalUnconstrained"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kDsintervalUnconstrained"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kBfile"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kBlob"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kClob"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kNclob"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kMlslabel"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kXmltype"
         }
       ]
     },
@@ -6117,8 +6964,45 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "comment"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "variable_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "subtype_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "cursor_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "exception_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "type_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "function_specification"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "procedure_specification"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "procedure_body"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "function_body"
+              }
+            ]
           }
         },
         {
@@ -6148,6 +7032,384 @@
               "type": "BLANK"
             }
           ]
+        }
+      ]
+    },
+    "function_body": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kFunction"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "parameter_list"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "return_type"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "kPipelined"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "kDeterministic"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "kIs"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "kAs"
+                    }
+                  ]
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "CHOICE",
+                          "members": [
+                            {
+                              "type": "SYMBOL",
+                              "name": "kDeclare"
+                            },
+                            {
+                              "type": "BLANK"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "CHOICE",
+                          "members": [
+                            {
+                              "type": "SYMBOL",
+                              "name": "seq_of_declare_specs"
+                            },
+                            {
+                              "type": "BLANK"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "body"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "call_spec"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "kPipelined"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "kAggregate"
+                    }
+                  ]
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "kUsing"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "name",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "identifier"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ";"
+        }
+      ]
+    },
+    "procedure_body": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kProcedure"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "parameter_list"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kIs"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "kAs"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "kDeclare"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "seq_of_declare_specs"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "body"
+                }
+              ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "call_spec"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "kExternal"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ";"
+        }
+      ]
+    },
+    "body": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kBegin"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "seq_of_statements"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "kException"
+                },
+                {
+                  "type": "REPEAT1",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "exception_handler"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kEnd"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "label_name",
+              "content": {
+                "type": "SYMBOL",
+                "name": "identifier"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "block": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kDeclare"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "declare_spec"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "body"
+        }
+      ]
+    },
+    "exception_handler": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kWhen"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "kOr"
+              },
+              {
+                "type": "FIELD",
+                "name": "name",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kThen"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "seq_of_statements"
         }
       ]
     },
@@ -6197,6 +7459,202 @@
               "type": "BLANK"
             }
           ]
+        }
+      ]
+    },
+    "parallel_enable_clause": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kParallelEnable"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "partition_by_clause"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "partition_by_clause": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kPartition"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "expression"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "kBy"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "kAny"
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "kHash"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "kRange"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "kList"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "paren_column_list"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "streaming_clause"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "result_cache_clause": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kResultCache"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "relies_on_part"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "relies_on_part": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kReliesOn"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "identifier"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": ")"
+            }
+          ]
+        }
+      ]
+    },
+    "streaming_clause": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kOrder"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "kCluser"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kBy"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "paren_column_list"
         }
       ]
     },
@@ -6281,65 +7739,417 @@
         }
       ]
     },
-    "kCreate": {
+    "kAccessible": {
       "type": "PATTERN",
-      "value": "[cC][rR][eE][aA][tT][eE]"
+      "value": "[aA][cC][cC][eE][sS][sS][iI][bB][lL][eE]"
     },
-    "kOr": {
+    "kAgent": {
       "type": "PATTERN",
-      "value": "[oO][rR]"
+      "value": "[aA][gG][eE][nN][tT]"
     },
-    "kReplace": {
+    "kAggregate": {
       "type": "PATTERN",
-      "value": "[rR][eE][pP][lL][aA][cC][eE]"
+      "value": "[aA][gG][gG][rR][eE][gG][aA][tT][eE]"
     },
-    "kPackage": {
+    "kAll": {
       "type": "PATTERN",
-      "value": "[pP][aA][cC][kK][aA][gG][eE]"
+      "value": "[aA][lL][lL]"
     },
-    "kBody": {
+    "kAnd": {
       "type": "PATTERN",
-      "value": "[bB][oO][dD][yY]"
+      "value": "[aA][nN][dD]"
     },
-    "kIs": {
+    "kAny": {
       "type": "PATTERN",
-      "value": "[iI][sS]"
+      "value": "[aA][nN][yY]"
+    },
+    "kApply": {
+      "type": "PATTERN",
+      "value": "[aA][pP][pP][lL][yY]"
+    },
+    "kArray": {
+      "type": "PATTERN",
+      "value": "[aA][rR][rR][aA][yY]"
     },
     "kAs": {
       "type": "PATTERN",
       "value": "[aA][sS]"
     },
-    "kFor": {
+    "kAsc": {
       "type": "PATTERN",
-      "value": "[fF][oO][rR]"
+      "value": "[aA][sS][cC]"
     },
-    "kEnd": {
+    "kAt": {
       "type": "PATTERN",
-      "value": "[eE][nN][dD]"
+      "value": "[aA][tT]"
     },
-    "kSynonym": {
+    "kAuthId": {
       "type": "PATTERN",
-      "value": "[sS][yY][nN][oO][nN][yY][mM]"
+      "value": "[aA][uU][tT][hH][iI][dD]"
     },
-    "kFunction": {
+    "kAuthid": {
       "type": "PATTERN",
-      "value": "[fF][uU][nN][cC][tT][iI][oO][nN]"
+      "value": "[aA][uU][tT][hH][iI][dD]"
     },
-    "kPipelined": {
+    "kAutomatic": {
       "type": "PATTERN",
-      "value": "[pP][iI][pP][eE][lL][iI][nN][eE][dD]"
+      "value": "[aA][uU][tT][oO][mM][aA][tT][iI][cC]"
+    },
+    "kAutonomousTransaction": {
+      "type": "PATTERN",
+      "value": "[aA][uU][tT][oO][nN][oO][mM][oO][uU][sS][__][tT][rR][aA][nN][sS][aA][cC][tT][iI][oO][nN]"
+    },
+    "kAvg": {
+      "type": "PATTERN",
+      "value": "[aA][vV][gG]"
+    },
+    "kBegin": {
+      "type": "PATTERN",
+      "value": "[bB][eE][gG][iI][nN]"
+    },
+    "kBetween": {
+      "type": "PATTERN",
+      "value": "[bB][eE][tT][wW][eE][eE][nN]"
+    },
+    "kBfile": {
+      "type": "PATTERN",
+      "value": "[bB][fF][iI][lL][eE]"
+    },
+    "kBinaryDouble": {
+      "type": "PATTERN",
+      "value": "[bB][iI][nN][aA][rR][yY][__][dD][oO][uU][bB][lL][eE]"
+    },
+    "kBinaryFloat": {
+      "type": "PATTERN",
+      "value": "[bB][iI][nN][aA][rR][yY][__][fF][lL][oO][aA][tT]"
+    },
+    "kBinaryInteger": {
+      "type": "PATTERN",
+      "value": "[bB][iI][nN][aA][rR][yY][__][iI][nN][tT][eE][gG][eE][rR]"
+    },
+    "kBlob": {
+      "type": "PATTERN",
+      "value": "[bB][lL][oO][bB]"
+    },
+    "kBlock": {
+      "type": "PATTERN",
+      "value": "[bB][lL][oO][cC][kK]"
+    },
+    "kBody": {
+      "type": "PATTERN",
+      "value": "[bB][oO][dD][yY]"
+    },
+    "kBoolean": {
+      "type": "PATTERN",
+      "value": "[bB][oO][oO][lL][eE][aA][nN]"
+    },
+    "kBoth": {
+      "type": "PATTERN",
+      "value": "[bB][oO][tT][hH]"
+    },
+    "kBreadth": {
+      "type": "PATTERN",
+      "value": "[bB][rR][eE][aA][dD][tT][hH]"
+    },
+    "kBulk": {
+      "type": "PATTERN",
+      "value": "[bB][uU][lL][kK]"
+    },
+    "kBy": {
+      "type": "PATTERN",
+      "value": "[bB][yY]"
+    },
+    "kByte": {
+      "type": "PATTERN",
+      "value": "[bB][yY][tT][eE]"
+    },
+    "kC": {
+      "type": "PATTERN",
+      "value": "[cC]"
+    },
+    "kChar": {
+      "type": "PATTERN",
+      "value": "[cC][hH][aA][rR]"
+    },
+    "kCharacter": {
+      "type": "PATTERN",
+      "value": "[cC][hH][aA][rR][aA][cC][tT][eE][rR]"
+    },
+    "kCheck": {
+      "type": "PATTERN",
+      "value": "[cC][hH][eE][cC][kK]"
+    },
+    "kChr": {
+      "type": "PATTERN",
+      "value": "[cC][hH][rR]"
+    },
+    "kClob": {
+      "type": "PATTERN",
+      "value": "[cC][lL][oO][bB]"
+    },
+    "kCluser": {
+      "type": "PATTERN",
+      "value": "[cC][lL][uU][sS][tT][eE][rR]"
+    },
+    "kCollect": {
+      "type": "PATTERN",
+      "value": "[cC][oO][lL][lL][eE][cC][tT]"
+    },
+    "kColumns": {
+      "type": "PATTERN",
+      "value": "[cC][oO][lL][uU][mM][nN][sS]"
+    },
+    "kConnect": {
+      "type": "PATTERN",
+      "value": "[cC][oO][nN][nN][eE][cC][tT]"
+    },
+    "kConnectByRoot": {
+      "type": "PATTERN",
+      "value": "[cC][oO][nN][nN][eE][cC][tT][__][bB][yY][__][rR][oO][oO][tT]"
+    },
+    "kConstant": {
+      "type": "PATTERN",
+      "value": "[cC][oO][nN][sS][tT][aA][nN][tT]"
+    },
+    "kConstraint": {
+      "type": "PATTERN",
+      "value": "[cC][oO][nN][sS][tT][rR][aA][iI][nN][tT]"
+    },
+    "kContext": {
+      "type": "PATTERN",
+      "value": "[cC][oO][nN][tT][eE][xX][tT]"
+    },
+    "kCorr": {
+      "type": "PATTERN",
+      "value": "[cC][oO][rR][rR]"
+    },
+    "kCount": {
+      "type": "PATTERN",
+      "value": "[cC][oO][uU][nN][tT]"
+    },
+    "kCovar": {
+      "type": "PATTERN",
+      "value": "[cC][oO][vV][aA][rR][__]"
+    },
+    "kCreate": {
+      "type": "PATTERN",
+      "value": "[cC][rR][eE][aA][tT][eE]"
+    },
+    "kCross": {
+      "type": "PATTERN",
+      "value": "[cC][rR][oO][sS][sS]"
+    },
+    "kCube": {
+      "type": "PATTERN",
+      "value": "[cC][uU][bB][eE]"
+    },
+    "kCurrent": {
+      "type": "PATTERN",
+      "value": "[cC][uU][rR][rR][eE][nN][tT]"
+    },
+    "kCurrentUser": {
+      "type": "PATTERN",
+      "value": "[cC][uU][rR][rR][eE][nN][tT][__][uU][sS][eE][rR]"
+    },
+    "kCursor": {
+      "type": "PATTERN",
+      "value": "[cC][uU][rR][sS][oO][rR]"
+    },
+    "kCycle": {
+      "type": "PATTERN",
+      "value": "[cC][yY][cC][lL][eE]"
+    },
+    "kD": {
+      "type": "PATTERN",
+      "value": "[dD]"
+    },
+    "kDate": {
+      "type": "PATTERN",
+      "value": "[dD][aA][tT][eE]"
+    },
+    "kDay": {
+      "type": "PATTERN",
+      "value": "[dD][aA][yY]"
+    },
+    "kDec": {
+      "type": "PATTERN",
+      "value": "[dD][eE][cC]"
+    },
+    "kDecimal": {
+      "type": "PATTERN",
+      "value": "[dD][eE][cC][iI][mM][aA][lL]"
+    },
+    "kDeclare": {
+      "type": "PATTERN",
+      "value": "[dD][eE][cC][lL][aA][rR][eE]"
+    },
+    "kDecode": {
+      "type": "PATTERN",
+      "value": "[dD][eE][cC][oO][dD][eE]"
+    },
+    "kDecrement": {
+      "type": "PATTERN",
+      "value": "[dD][eE][cC][rR][eE][mM][eE][nN][tT]"
+    },
+    "kDefault": {
+      "type": "PATTERN",
+      "value": "[dD][eE][fF][aA][uU][lL][tT]"
+    },
+    "kDefiner": {
+      "type": "PATTERN",
+      "value": "[dD][eE][fF][iI][nN][eE][rR]"
+    },
+    "kDenseRank": {
+      "type": "PATTERN",
+      "value": "[dD][eE][nN][sS][eE][__][rR][aA][nN][kK]"
+    },
+    "kDepth": {
+      "type": "PATTERN",
+      "value": "[dD][eE][pP][tT][hH]"
+    },
+    "kDesc": {
+      "type": "PATTERN",
+      "value": "[dD][eE][sS][cC]"
     },
     "kDeterministic": {
       "type": "PATTERN",
       "value": "[dD][eE][tT][eE][rR][mM][iI][nN][iI][sS][tT][iI][cC]"
     },
-    "kResultCache": {
+    "kDimension": {
       "type": "PATTERN",
-      "value": "[rR][eE][sS][uU][lL][tT][__][cC][aA][cC][hH][eE]"
+      "value": "[dD][iI][mM][eE][nN][sS][iI][oO][nN]"
     },
-    "kProcedure": {
+    "kDistinct": {
       "type": "PATTERN",
-      "value": "[pP][rR][oO][cC][eE][dD][uU][rR][eE]"
+      "value": "[dD][iI][sS][tT][iI][nN][cC][tT]"
+    },
+    "kDouble": {
+      "type": "PATTERN",
+      "value": "[dD][oO][uU][bB][lL][eE]"
+    },
+    "kDsintervalUnconstrained": {
+      "type": "PATTERN",
+      "value": "[dD][sS][iI][nN][tT][eE][rR][vV][aA][lL][__][uU][nN][cC][oO][nN][sS][tT][rR][aA][iI][nN][eE][dD]"
+    },
+    "kEditionable": {
+      "type": "PATTERN",
+      "value": "[eE][dD][iI][tT][iI][oO][nN][aA][bB][lL][eE]"
+    },
+    "kEmpty": {
+      "type": "PATTERN",
+      "value": "[eE][mM][pP][tT][yY]"
+    },
+    "kEnd": {
+      "type": "PATTERN",
+      "value": "[eE][nN][dD]"
+    },
+    "kEntityescaping": {
+      "type": "PATTERN",
+      "value": "[eE][nN][tT][iI][tT][yY][eE][sS][cC][aA][pP][iI][nN][gG]"
+    },
+    "kError": {
+      "type": "PATTERN",
+      "value": "[eE][rR][rR][oO][rR]"
+    },
+    "kEscape": {
+      "type": "PATTERN",
+      "value": "[eE][sS][cC][aA][pP][eE]"
+    },
+    "kEvalname": {
+      "type": "PATTERN",
+      "value": "[eE][vV][aA][lL][nN][aA][mM][eE]"
+    },
+    "kException": {
+      "type": "PATTERN",
+      "value": "[eE][xX][cC][eE][pP][tT][iI][oO][nN]"
+    },
+    "kExceptionInit": {
+      "type": "PATTERN",
+      "value": "[eE][xX][cC][eE][pP][tT][iI][oO][nN][__][iI][nN][iI][tT]"
+    },
+    "kExclude": {
+      "type": "PATTERN",
+      "value": "[eE][xX][cC][lL][uU][dD][eE]"
+    },
+    "kExists": {
+      "type": "PATTERN",
+      "value": "[eE][xX][iI][sS][tT][sS]"
+    },
+    "kExternal": {
+      "type": "PATTERN",
+      "value": "[eE][xX][tT][eE][rR][nN][aA][lL]"
+    },
+    "kF": {
+      "type": "PATTERN",
+      "value": "[fF]"
+    },
+    "kFalse": {
+      "type": "PATTERN",
+      "value": "[fF][aA][lL][sS][eE]"
+    },
+    "kFetch": {
+      "type": "PATTERN",
+      "value": "[fF][eE][tT][cC][hH]"
+    },
+    "kFirst": {
+      "type": "PATTERN",
+      "value": "[fF][iI][rR][sS][tT]"
+    },
+    "kFloat": {
+      "type": "PATTERN",
+      "value": "[fF][lL][oO][aA][tT]"
+    },
+    "kFollowing": {
+      "type": "PATTERN",
+      "value": "[fF][oO][lL][lL][oO][wW][iI][nN][gG]"
+    },
+    "kFor": {
+      "type": "PATTERN",
+      "value": "[fF][oO][rR]"
+    },
+    "kFrom": {
+      "type": "PATTERN",
+      "value": "[fF][rR][oO][mM]"
+    },
+    "kFull": {
+      "type": "PATTERN",
+      "value": "[fF][uU][lL][lL]"
+    },
+    "kFunction": {
+      "type": "PATTERN",
+      "value": "[fF][uU][nN][cC][tT][iI][oO][nN]"
+    },
+    "kGreatest": {
+      "type": "PATTERN",
+      "value": "[gG][rR][eE][aA][tT][eE][sS][tT]"
+    },
+    "kGroup": {
+      "type": "PATTERN",
+      "value": "[gG][rR][oO][uU][pP]"
+    },
+    "kGrouping": {
+      "type": "PATTERN",
+      "value": "[gG][rR][oO][uU][pP][iI][nN][gG]"
+    },
+    "kHash": {
+      "type": "PATTERN",
+      "value": "[hH][aA][sS][hH]"
+    },
+    "kHaving": {
+      "type": "PATTERN",
+      "value": "[hH][aA][vV][iI][nN][gG]"
+    },
+    "kHour": {
+      "type": "PATTERN",
+      "value": "[hH][oO][uU][rR]"
+    },
+    "kIdentified": {
+      "type": "PATTERN",
+      "value": "[iI][dD][eE][nN][tT][iI][fF][iI][eE][dD]"
+    },
+    "kIgnore": {
+      "type": "PATTERN",
+      "value": "[iI][gG][nN][oO][rR][eE]"
     },
     "kIn": {
       "type": "PATTERN",
@@ -6349,233 +8159,649 @@
       "type": "PATTERN",
       "value": "[iI][nN][  ][oO][uU][tT]"
     },
-    "kOut": {
+    "kInclude": {
       "type": "PATTERN",
-      "value": "[oO][uU][tT]"
+      "value": "[iI][nN][cC][lL][uU][dD][eE]"
     },
-    "kReturn": {
+    "kIncrement": {
       "type": "PATTERN",
-      "value": "[rR][eE][tT][uU][rR][nN]"
+      "value": "[iI][nN][cC][rR][eE][mM][eE][nN][tT]"
     },
-    "kType": {
+    "kIndex": {
       "type": "PATTERN",
-      "value": "[tT][yY][pP][eE]"
+      "value": "[iI][nN][dD][eE][xX]"
     },
-    "kNumber": {
+    "kIndexed": {
       "type": "PATTERN",
-      "value": "[nN][uU][mM][bB][eE][rR]"
+      "value": "[iI][nN][dD][eE][xX][eE][dD]"
     },
-    "kChar": {
+    "kIndicator": {
       "type": "PATTERN",
-      "value": "[cC][hH][aA][rR]"
+      "value": "[iI][nN][dD][iI][cC][aA][tT][oO][rR]"
     },
-    "kVarchar2": {
+    "kInfinite": {
       "type": "PATTERN",
-      "value": "[vV][aA][rR][cC][hH][aA][rR][22]"
-    },
-    "kDate": {
-      "type": "PATTERN",
-      "value": "[dD][aA][tT][eE]"
-    },
-    "kDefault": {
-      "type": "PATTERN",
-      "value": "[dD][eE][fF][aA][uU][lL][tT]"
-    },
-    "kConstant": {
-      "type": "PATTERN",
-      "value": "[cC][oO][nN][sS][tT][aA][nN][tT]"
-    },
-    "kNot": {
-      "type": "PATTERN",
-      "value": "[nN][oO][tT]"
-    },
-    "kTrue": {
-      "type": "PATTERN",
-      "value": "[tT][rR][uU][eE]"
-    },
-    "kFalse": {
-      "type": "PATTERN",
-      "value": "[fF][aA][lL][sS][eE]"
-    },
-    "kNull": {
-      "type": "PATTERN",
-      "value": "[nN][uU][lL][lL]"
-    },
-    "kNoCopy": {
-      "type": "PATTERN",
-      "value": "[nN][oO][cC][oO][pP][yY]"
-    },
-    "kExceptionInit": {
-      "type": "PATTERN",
-      "value": "[eE][xX][cC][eE][pP][tT][iI][oO][nN][__][iI][nN][iI][tT]"
-    },
-    "kSeriallyReusable": {
-      "type": "PATTERN",
-      "value": "[sS][eE][rR][iI][aA][lL][lL][yY][__][rR][eE][uU][sS][aA][bB][lL][eE]"
-    },
-    "kAutonomousTransaction": {
-      "type": "PATTERN",
-      "value": "[aA][uU][tT][oO][nN][oO][mM][oO][uU][sS][__][tT][rR][aA][nN][sS][aA][cC][tT][iI][oO][nN]"
-    },
-    "kPragma": {
-      "type": "PATTERN",
-      "value": "[pP][rR][aA][gG][mM][aA]"
-    },
-    "kStrYes": {
-      "type": "PATTERN",
-      "value": "[''][yY][eE][sS]['']"
-    },
-    "kStrNo": {
-      "type": "PATTERN",
-      "value": "[''][nN][oO]['']"
+      "value": "[iI][nN][fF][iI][nN][iI][tT][eE]"
     },
     "kInline": {
       "type": "PATTERN",
       "value": "[iI][nN][lL][iI][nN][eE]"
     },
-    "kRestrictReferences": {
+    "kInner": {
       "type": "PATTERN",
-      "value": "[rR][eE][sS][tT][rR][iI][cC][tT][__][rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]"
+      "value": "[iI][nN][nN][eE][rR]"
     },
-    "kRNDS": {
+    "kInt": {
       "type": "PATTERN",
-      "value": "[rR][nN][dD][sS]"
+      "value": "[iI][nN][tT]"
     },
-    "kWNDS": {
+    "kInteger": {
       "type": "PATTERN",
-      "value": "[wW][nN][dD][sS]"
-    },
-    "kRNPS": {
-      "type": "PATTERN",
-      "value": "[rR][nN][pP][sS]"
-    },
-    "kWNPS": {
-      "type": "PATTERN",
-      "value": "[wW][nN][pP][sS]"
-    },
-    "kTRUST": {
-      "type": "PATTERN",
-      "value": "[tT][rR][uU][sS][tT]"
-    },
-    "kSubType": {
-      "type": "PATTERN",
-      "value": "[sS][uU][bB][tT][yY][pP][eE]"
-    },
-    "kRange": {
-      "type": "PATTERN",
-      "value": "[rR][aA][nN][gG][eE]"
-    },
-    "kCursor": {
-      "type": "PATTERN",
-      "value": "[cC][uU][rR][sS][oO][rR]"
-    },
-    "kWith": {
-      "type": "PATTERN",
-      "value": "[wW][iI][tT][hH]"
-    },
-    "kDepth": {
-      "type": "PATTERN",
-      "value": "[dD][eE][pP][tT][hH]"
-    },
-    "kBreadth": {
-      "type": "PATTERN",
-      "value": "[bB][rR][eE][aA][dD][tT][hH]"
-    },
-    "kAsc": {
-      "type": "PATTERN",
-      "value": "[aA][sS][cC]"
-    },
-    "kDesc": {
-      "type": "PATTERN",
-      "value": "[dD][eE][sS][cC]"
-    },
-    "kFirst": {
-      "type": "PATTERN",
-      "value": "[fF][iI][rR][sS][tT]"
-    },
-    "kLast": {
-      "type": "PATTERN",
-      "value": "[lL][aA][sS][tT]"
-    },
-    "kNulls": {
-      "type": "PATTERN",
-      "value": "[nN][uU][lL][lL][sS]"
-    },
-    "kSearch": {
-      "type": "PATTERN",
-      "value": "[sS][eE][aA][rR][cC][hH]"
-    },
-    "kBy": {
-      "type": "PATTERN",
-      "value": "[bB][yY]"
-    },
-    "kSet": {
-      "type": "PATTERN",
-      "value": "[sS][eE][tT]"
-    },
-    "kCycle": {
-      "type": "PATTERN",
-      "value": "[cC][yY][cC][lL][eE]"
-    },
-    "kTo": {
-      "type": "PATTERN",
-      "value": "[tT][oO]"
-    },
-    "kAll": {
-      "type": "PATTERN",
-      "value": "[aA][lL][lL]"
-    },
-    "kUnion": {
-      "type": "PATTERN",
-      "value": "[uU][nN][iI][oO][nN]"
+      "value": "[iI][nN][tT][eE][gG][eE][rR]"
     },
     "kIntersect": {
       "type": "PATTERN",
       "value": "[iI][nN][tT][eE][rR][sS][eE][cC][tT]"
     },
-    "kMinus": {
+    "kInterval": {
       "type": "PATTERN",
-      "value": "[mM][iI][nN][uU][sS]"
-    },
-    "kDistinct": {
-      "type": "PATTERN",
-      "value": "[dD][iI][sS][tT][iI][nN][cC][tT]"
-    },
-    "kUnique": {
-      "type": "PATTERN",
-      "value": "[uU][nN][iI][qQ][uU][eE]"
-    },
-    "kBulk": {
-      "type": "PATTERN",
-      "value": "[bB][uU][lL][kK]"
-    },
-    "kCollect": {
-      "type": "PATTERN",
-      "value": "[cC][oO][lL][lL][eE][cC][tT]"
+      "value": "[iI][nN][tT][eE][rR][vV][aA][lL]"
     },
     "kInto": {
       "type": "PATTERN",
       "value": "[iI][nN][tT][oO]"
     },
-    "kCurrent": {
+    "kIntroducer": {
       "type": "PATTERN",
-      "value": "[cC][uU][rR][rR][eE][nN][tT]"
+      "value": "[iI][nN][tT][rR][oO][dD][uU][cC][eE][rR]"
+    },
+    "kIs": {
+      "type": "PATTERN",
+      "value": "[iI][sS]"
+    },
+    "kIterate": {
+      "type": "PATTERN",
+      "value": "[iI][tT][eE][rR][aA][tT][eE]"
+    },
+    "kJava": {
+      "type": "PATTERN",
+      "value": "[jJ][aA][vV][aA]"
+    },
+    "kJoin": {
+      "type": "PATTERN",
+      "value": "[jJ][oO][iI][nN]"
+    },
+    "kKeep": {
+      "type": "PATTERN",
+      "value": "[kK][eE][eE][pP]"
+    },
+    "kLag": {
+      "type": "PATTERN",
+      "value": "[lL][aA][gG]"
+    },
+    "kLanguage": {
+      "type": "PATTERN",
+      "value": "[lL][aA][nN][gG][uU][aA][gG][eE]"
+    },
+    "kLast": {
+      "type": "PATTERN",
+      "value": "[lL][aA][sS][tT]"
+    },
+    "kLead": {
+      "type": "PATTERN",
+      "value": "[lL][eE][aA][dD]"
+    },
+    "kLeading": {
+      "type": "PATTERN",
+      "value": "[lL][eE][aA][dD][iI][nN][gG]"
+    },
+    "kLeast": {
+      "type": "PATTERN",
+      "value": "[lL][eE][aA][sS][tT]"
+    },
+    "kLeft": {
+      "type": "PATTERN",
+      "value": "[lL][eE][fF][tT]"
+    },
+    "kLibrary": {
+      "type": "PATTERN",
+      "value": "[lL][iI][bB][rR][aA][rR][yY]"
+    },
+    "kLike2": {
+      "type": "PATTERN",
+      "value": "[lL][iI][kK][eE][22]"
+    },
+    "kLike4": {
+      "type": "PATTERN",
+      "value": "[lL][iI][kK][eE][44]"
+    },
+    "kLike": {
+      "type": "PATTERN",
+      "value": "[lL][iI][kK][eE]"
+    },
+    "kLikec": {
+      "type": "PATTERN",
+      "value": "[lL][iI][kK][eE][cC]"
+    },
+    "kList": {
+      "type": "PATTERN",
+      "value": "[lL][iI][sS][tT]"
+    },
+    "kLocal": {
+      "type": "PATTERN",
+      "value": "[lL][oO][cC][aA][lL]"
+    },
+    "kLocked": {
+      "type": "PATTERN",
+      "value": "[lL][oO][cC][kK][eE][dD]"
+    },
+    "kLong": {
+      "type": "PATTERN",
+      "value": "[lL][oO][nN][gG]"
+    },
+    "kMain": {
+      "type": "PATTERN",
+      "value": "[mM][aA][iI][nN]"
+    },
+    "kMax": {
+      "type": "PATTERN",
+      "value": "[mM][aA][xX]"
+    },
+    "kMaxvalue": {
+      "type": "PATTERN",
+      "value": "[mM][aA][xX][vV][aA][lL][uU][eE]"
+    },
+    "kMeasures": {
+      "type": "PATTERN",
+      "value": "[mM][eE][aA][sS][uU][rR][eE][sS]"
+    },
+    "kMedian": {
+      "type": "PATTERN",
+      "value": "[mM][eE][dD][iI][aA][nN]"
+    },
+    "kMember": {
+      "type": "PATTERN",
+      "value": "[mM][eE][mM][bB][eE][rR]"
+    },
+    "kMin": {
+      "type": "PATTERN",
+      "value": "[mM][iI][nN]"
+    },
+    "kMinus": {
+      "type": "PATTERN",
+      "value": "[mM][iI][nN][uU][sS]"
+    },
+    "kMinute": {
+      "type": "PATTERN",
+      "value": "[mM][iI][nN][uU][tT][eE]"
+    },
+    "kMlslabel": {
+      "type": "PATTERN",
+      "value": "[mM][lL][sS][lL][aA][bB][eE][lL]"
+    },
+    "kModel": {
+      "type": "PATTERN",
+      "value": "[mM][oO][dD][eE][lL]"
+    },
+    "kMonth": {
+      "type": "PATTERN",
+      "value": "[mM][oO][nN][tT][hH]"
+    },
+    "kName": {
+      "type": "PATTERN",
+      "value": "[nN][aA][mM][eE]"
+    },
+    "kNan": {
+      "type": "PATTERN",
+      "value": "[nN][aA][nN]"
+    },
+    "kNatural": {
+      "type": "PATTERN",
+      "value": "[nN][aA][tT][uU][rR][aA][lL]"
+    },
+    "kNaturaln": {
+      "type": "PATTERN",
+      "value": "[nN][aA][tT][uU][rR][aA][lL][nN]"
+    },
+    "kNav": {
+      "type": "PATTERN",
+      "value": "[nN][aA][vV]"
+    },
+    "kNchar": {
+      "type": "PATTERN",
+      "value": "[nN][cC][hH][aA][rR]"
+    },
+    "kNcharCs": {
+      "type": "PATTERN",
+      "value": "[nN][cC][hH][aA][rR][__][cC][sS]"
+    },
+    "kNclob": {
+      "type": "PATTERN",
+      "value": "[nN][cC][lL][oO][bB]"
+    },
+    "kNext": {
+      "type": "PATTERN",
+      "value": "[nN][eE][xX][tT]"
+    },
+    "kNo": {
+      "type": "PATTERN",
+      "value": "[nN][oO]"
+    },
+    "kNoCopy": {
+      "type": "PATTERN",
+      "value": "[nN][oO][cC][oO][pP][yY]"
+    },
+    "kNoCycle": {
+      "type": "PATTERN",
+      "value": "[nN][oO][cC][yY][cC][lL][eE]"
+    },
+    "kNocicle": {
+      "type": "PATTERN",
+      "value": "[nN][oO][cC][iI][cC][lL][eE]"
+    },
+    "kNocopy": {
+      "type": "PATTERN",
+      "value": "[nN][oO][cC][oO][pP][yY]"
+    },
+    "kNoentityescaping": {
+      "type": "PATTERN",
+      "value": "[nN][oO][eE][nN][tT][iI][tT][yY][eE][sS][cC][aA][pP][iI][nN][gG]"
+    },
+    "kNoneditionable": {
+      "type": "PATTERN",
+      "value": "[nN][oO][nN][eE][dD][iI][tT][iI][oO][nN][aA][bB][lL][eE]"
+    },
+    "kNoschemacheck": {
+      "type": "PATTERN",
+      "value": "[nN][oO][sS][cC][hH][eE][mM][aA][cC][hH][eE][cC][kK]"
+    },
+    "kNot": {
+      "type": "PATTERN",
+      "value": "[nN][oO][tT]"
+    },
+    "kNowait": {
+      "type": "PATTERN",
+      "value": "[nN][oO][wW][aA][iI][tT]"
+    },
+    "kNtile": {
+      "type": "PATTERN",
+      "value": "[nN][tT][iI][lL][eE]"
+    },
+    "kNull": {
+      "type": "PATTERN",
+      "value": "[nN][uU][lL][lL]"
+    },
+    "kNulls": {
+      "type": "PATTERN",
+      "value": "[nN][uU][lL][lL][sS]"
+    },
+    "kNumber": {
+      "type": "PATTERN",
+      "value": "[nN][uU][mM][bB][eE][rR]"
+    },
+    "kNumeric": {
+      "type": "PATTERN",
+      "value": "[nN][uU][mM][eE][rR][iI][cC]"
+    },
+    "kNvarchar2": {
+      "type": "PATTERN",
+      "value": "[nN][vV][aA][rR][cC][hH][aA][rR][22]"
+    },
+    "kNvl": {
+      "type": "PATTERN",
+      "value": "[nN][vV][lL]"
     },
     "kOf": {
       "type": "PATTERN",
       "value": "[oO][fF]"
     },
-    "kWhere": {
+    "kOffset": {
       "type": "PATTERN",
-      "value": "[wW][hH][eE][rR][eE]"
+      "value": "[oO][fF][fF][sS][eE][tT]"
+    },
+    "kOn": {
+      "type": "PATTERN",
+      "value": "[oO][nN]"
+    },
+    "kOnly": {
+      "type": "PATTERN",
+      "value": "[oO][nN][lL][yY]"
+    },
+    "kOption": {
+      "type": "PATTERN",
+      "value": "[oO][pP][tT][iI][oO][nN]"
+    },
+    "kOr": {
+      "type": "PATTERN",
+      "value": "[oO][rR]"
+    },
+    "kOrder": {
+      "type": "PATTERN",
+      "value": "[oO][rR][dD][eE][rR]"
+    },
+    "kOrdinality": {
+      "type": "PATTERN",
+      "value": "[oO][rR][dD][iI][nN][aA][lL][iI][tT][yY]"
+    },
+    "kOut": {
+      "type": "PATTERN",
+      "value": "[oO][uU][tT]"
+    },
+    "kOuter": {
+      "type": "PATTERN",
+      "value": "[oO][uU][tT][eE][rR]"
+    },
+    "kOver": {
+      "type": "PATTERN",
+      "value": "[oO][vV][eE][rR]"
+    },
+    "kOverflow": {
+      "type": "PATTERN",
+      "value": "[oO][vV][eE][rR][fF][lL][oO][wW]"
+    },
+    "kPackage": {
+      "type": "PATTERN",
+      "value": "[pP][aA][cC][kK][aA][gG][eE]"
+    },
+    "kParallelEnable": {
+      "type": "PATTERN",
+      "value": "[pP][aA][rR][aA][lL][lL][eE][lL][__][eE][nN][aA][bB][lL][eE]"
+    },
+    "kParameter": {
+      "type": "PATTERN",
+      "value": "[pP][aA][rR][aA][mM][eE][tT][eE][rR]"
+    },
+    "kPartition": {
+      "type": "PATTERN",
+      "value": "[pP][aA][rR][tT][iI][tT][iI][oO][nN]"
+    },
+    "kPassing": {
+      "type": "PATTERN",
+      "value": "[pP][aA][sS][sS][iI][nN][gG]"
+    },
+    "kPath": {
+      "type": "PATTERN",
+      "value": "[pP][aA][tT][hH]"
+    },
+    "kPerRowType": {
+      "type": "PATTERN",
+      "value": "[%%][rR][oO][wW][tT][yY][pP][eE]"
+    },
+    "kPerType": {
+      "type": "PATTERN",
+      "value": "[%%][tT][yY][pP][eE]"
+    },
+    "kPercent": {
+      "type": "PATTERN",
+      "value": "[pP][eE][rR][cC][eE][nN][tT]"
+    },
+    "kPipelined": {
+      "type": "PATTERN",
+      "value": "[pP][iI][pP][eE][lL][iI][nN][eE][dD]"
+    },
+    "kPivot": {
+      "type": "PATTERN",
+      "value": "[pP][iI][vV][oO][tT]"
+    },
+    "kPositive": {
+      "type": "PATTERN",
+      "value": "[pP][oO][sS][iI][tT][iI][vV][eE]"
+    },
+    "kPositiven": {
+      "type": "PATTERN",
+      "value": "[pP][oO][sS][iI][tT][iI][vV][eE][nN]"
+    },
+    "kPragma": {
+      "type": "PATTERN",
+      "value": "[pP][rR][aA][gG][mM][aA]"
+    },
+    "kPreceding": {
+      "type": "PATTERN",
+      "value": "[pP][rR][eE][cC][eE][dD][iI][nN][gG]"
+    },
+    "kPrecision": {
+      "type": "PATTERN",
+      "value": "[pP][rR][eE][cC][iI][sS][iI][oO][nN]"
+    },
+    "kPresent": {
+      "type": "PATTERN",
+      "value": "[pP][rR][eE][sS][eE][nN][tT]"
+    },
+    "kPrior": {
+      "type": "PATTERN",
+      "value": "[pP][rR][iI][oO][rR]"
+    },
+    "kProcedure": {
+      "type": "PATTERN",
+      "value": "[pP][rR][oO][cC][eE][dD][uU][rR][eE]"
+    },
+    "kRNDS": {
+      "type": "PATTERN",
+      "value": "[rR][nN][dD][sS]"
+    },
+    "kRNPS": {
+      "type": "PATTERN",
+      "value": "[rR][nN][pP][sS]"
+    },
+    "kRange": {
+      "type": "PATTERN",
+      "value": "[rR][aA][nN][gG][eE]"
+    },
+    "kRatioToReport": {
+      "type": "PATTERN",
+      "value": "[rR][aA][tT][iI][oO][__][tT][oO][__][rR][eE][pP][oO][rR][tT]"
+    },
+    "kRaw": {
+      "type": "PATTERN",
+      "value": "[rR][aA][wW]"
+    },
+    "kRead": {
+      "type": "PATTERN",
+      "value": "[rR][eE][aA][dD]"
+    },
+    "kReal": {
+      "type": "PATTERN",
+      "value": "[rR][eE][aA][lL]"
+    },
+    "kRecord": {
+      "type": "PATTERN",
+      "value": "[rR][eE][cC][oO][rR][dD]"
+    },
+    "kRef": {
+      "type": "PATTERN",
+      "value": "[rR][eE][fF]"
+    },
+    "kReference": {
+      "type": "PATTERN",
+      "value": "[rR][eE][fF][eE][rR][eE][nN][cC][eE]"
+    },
+    "kRegr": {
+      "type": "PATTERN",
+      "value": "[rR][eE][gG][rR][__]"
+    },
+    "kReliesOn": {
+      "type": "PATTERN",
+      "value": "[rR][eE][lL][iI][eE][sS][__][oO][nN]"
+    },
+    "kReplace": {
+      "type": "PATTERN",
+      "value": "[rR][eE][pP][lL][aA][cC][eE]"
+    },
+    "kRespect": {
+      "type": "PATTERN",
+      "value": "[rR][eE][sS][pP][eE][cC][tT]"
+    },
+    "kRestrictReferences": {
+      "type": "PATTERN",
+      "value": "[rR][eE][sS][tT][rR][iI][cC][tT][__][rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]"
+    },
+    "kResultCache": {
+      "type": "PATTERN",
+      "value": "[rR][eE][sS][uU][lL][tT][__][cC][aA][cC][hH][eE]"
+    },
+    "kReturn": {
+      "type": "PATTERN",
+      "value": "[rR][eE][tT][uU][rR][nN]"
+    },
+    "kRight": {
+      "type": "PATTERN",
+      "value": "[rR][iI][gG][hH][tT]"
+    },
+    "kRollup": {
+      "type": "PATTERN",
+      "value": "[rR][oO][lL][lL][uU][pP]"
+    },
+    "kRound": {
+      "type": "PATTERN",
+      "value": "[rR][oO][uU][nN][dD]"
+    },
+    "kRow": {
+      "type": "PATTERN",
+      "value": "[rR][oO][wW]"
+    },
+    "kRowNumber": {
+      "type": "PATTERN",
+      "value": "[rR][oO][wW][__][nN][uU][mM][bB][eE][rR]"
+    },
+    "kRowType": {
+      "type": "PATTERN",
+      "value": "[rR][oO][wW][tT][yY][pP][eE]"
+    },
+    "kRowid": {
+      "type": "PATTERN",
+      "value": "[rR][oO][wW][iI][dD]"
+    },
+    "kRows": {
+      "type": "PATTERN",
+      "value": "[rR][oO][wW][sS]"
+    },
+    "kRules": {
+      "type": "PATTERN",
+      "value": "[rR][uU][lL][eE][sS]"
+    },
+    "kSample": {
+      "type": "PATTERN",
+      "value": "[sS][aA][mM][pP][lL][eE]"
+    },
+    "kSchemacheck": {
+      "type": "PATTERN",
+      "value": "[sS][cC][hH][eE][mM][aA][cC][hH][eE][cC][kK]"
+    },
+    "kScn": {
+      "type": "PATTERN",
+      "value": "[sS][cC][nN]"
+    },
+    "kSearch": {
+      "type": "PATTERN",
+      "value": "[sS][eE][aA][rR][cC][hH]"
+    },
+    "kSecond": {
+      "type": "PATTERN",
+      "value": "[sS][eE][cC][oO][nN][dD]"
+    },
+    "kSeed": {
+      "type": "PATTERN",
+      "value": "[sS][eE][eE][dD]"
     },
     "kSelect": {
       "type": "PATTERN",
       "value": "[sS][eE][lL][eE][cC][tT]"
     },
-    "kFrom": {
+    "kSequential": {
       "type": "PATTERN",
-      "value": "[fF][rR][oO][mM]"
+      "value": "[sS][eE][qQ][uU][eE][nN][tT][iI][aA][lL]"
+    },
+    "kSeriallyReusable": {
+      "type": "PATTERN",
+      "value": "[sS][eE][rR][iI][aA][lL][lL][yY][__][rR][eE][uU][sS][aA][bB][lL][eE]"
+    },
+    "kSet": {
+      "type": "PATTERN",
+      "value": "[sS][eE][tT]"
+    },
+    "kSets": {
+      "type": "PATTERN",
+      "value": "[sS][eE][tT][sS]"
+    },
+    "kSiblings": {
+      "type": "PATTERN",
+      "value": "[sS][iI][bB][lL][iI][nN][gG][sS]"
+    },
+    "kSigntype": {
+      "type": "PATTERN",
+      "value": "[sS][iI][gG][nN][tT][yY][pP][eE]"
+    },
+    "kSimpleInteger": {
+      "type": "PATTERN",
+      "value": "[sS][iI][mM][pP][lL][eE][__][iI][nN][tT][eE][gG][eE][rR]"
+    },
+    "kSingle": {
+      "type": "PATTERN",
+      "value": "[sS][iI][nN][gG][lL][eE]"
+    },
+    "kSkip": {
+      "type": "PATTERN",
+      "value": "[sS][kK][iI][pP]"
+    },
+    "kSmallint": {
+      "type": "PATTERN",
+      "value": "[sS][mM][aA][lL][lL][iI][nN][tT]"
+    },
+    "kSnapshot": {
+      "type": "PATTERN",
+      "value": "[sS][nN][aA][pP][sS][hH][oO][tT]"
+    },
+    "kSome": {
+      "type": "PATTERN",
+      "value": "[sS][oO][mM][eE]"
+    },
+    "kStart": {
+      "type": "PATTERN",
+      "value": "[sS][tT][aA][rR][tT]"
+    },
+    "kStddev": {
+      "type": "PATTERN",
+      "value": "[sS][tT][dD][dD][eE][vV]"
+    },
+    "kStrNo": {
+      "type": "PATTERN",
+      "value": "[''][nN][oO]['']"
+    },
+    "kStrYes": {
+      "type": "PATTERN",
+      "value": "[''][yY][eE][sS]['']"
+    },
+    "kString": {
+      "type": "PATTERN",
+      "value": "[sS][tT][rR][iI][nN][gG]"
+    },
+    "kSubType": {
+      "type": "PATTERN",
+      "value": "[sS][uU][bB][tT][yY][pP][eE]"
+    },
+    "kSubmultiset": {
+      "type": "PATTERN",
+      "value": "[sS][uU][bB][mM][uU][lL][tT][iI][sS][eE][tT]"
+    },
+    "kSubpartition": {
+      "type": "PATTERN",
+      "value": "[sS][uU][bB][pP][aA][rR][tT][iI][tT][iI][oO][nN]"
+    },
+    "kSubstr": {
+      "type": "PATTERN",
+      "value": "[sS][uU][bB][sS][tT][rR]"
+    },
+    "kSum": {
+      "type": "PATTERN",
+      "value": "[sS][uU][mM]"
+    },
+    "kSynonym": {
+      "type": "PATTERN",
+      "value": "[sS][yY][nN][oO][nN][yY][mM]"
+    },
+    "kTRUST": {
+      "type": "PATTERN",
+      "value": "[tT][rR][uU][sS][tT]"
     },
     "kTable": {
       "type": "PATTERN",
@@ -6585,558 +8811,229 @@
       "type": "PATTERN",
       "value": "[tT][hH][eE]"
     },
-    "kRead": {
+    "kThen": {
       "type": "PATTERN",
-      "value": "[rR][eE][aA][dD]"
-    },
-    "kOnly": {
-      "type": "PATTERN",
-      "value": "[oO][nN][lL][yY]"
-    },
-    "kConstraint": {
-      "type": "PATTERN",
-      "value": "[cC][oO][nN][sS][tT][rR][aA][iI][nN][tT]"
-    },
-    "kCheck": {
-      "type": "PATTERN",
-      "value": "[cC][hH][eE][cC][kK]"
-    },
-    "kOption": {
-      "type": "PATTERN",
-      "value": "[oO][pP][tT][iI][oO][nN]"
-    },
-    "kBlock": {
-      "type": "PATTERN",
-      "value": "[bB][lL][oO][cC][kK]"
-    },
-    "kSample": {
-      "type": "PATTERN",
-      "value": "[sS][aA][mM][pP][lL][eE]"
-    },
-    "kSeed": {
-      "type": "PATTERN",
-      "value": "[sS][eE][eE][dD]"
-    },
-    "kCross": {
-      "type": "PATTERN",
-      "value": "[cC][rR][oO][sS][sS]"
-    },
-    "kNatural": {
-      "type": "PATTERN",
-      "value": "[nN][aA][tT][uU][rR][aA][lL]"
-    },
-    "kInner": {
-      "type": "PATTERN",
-      "value": "[iI][nN][nN][eE][rR]"
-    },
-    "kJoin": {
-      "type": "PATTERN",
-      "value": "[jJ][oO][iI][nN]"
-    },
-    "kOn": {
-      "type": "PATTERN",
-      "value": "[oO][nN]"
-    },
-    "kUsing": {
-      "type": "PATTERN",
-      "value": "[uU][sS][iI][nN][gG]"
-    },
-    "kLeft": {
-      "type": "PATTERN",
-      "value": "[lL][eE][fF][tT]"
-    },
-    "kRight": {
-      "type": "PATTERN",
-      "value": "[rR][iI][gG][hH][tT]"
-    },
-    "kFull": {
-      "type": "PATTERN",
-      "value": "[fF][uU][lL][lL]"
-    },
-    "kOuter": {
-      "type": "PATTERN",
-      "value": "[oO][uU][tT][eE][rR]"
-    },
-    "kPartition": {
-      "type": "PATTERN",
-      "value": "[pP][aA][rR][tT][iI][tT][iI][oO][nN]"
-    },
-    "kScn": {
-      "type": "PATTERN",
-      "value": "[sS][cC][nN]"
-    },
-    "kTimestamp": {
-      "type": "PATTERN",
-      "value": "[tT][iI][mM][eE][sS][tT][aA][mM][pP]"
-    },
-    "kVersions": {
-      "type": "PATTERN",
-      "value": "[vV][eE][rR][sS][iI][oO][nN][sS]"
-    },
-    "kBetween": {
-      "type": "PATTERN",
-      "value": "[bB][eE][tT][wW][eE][eE][nN]"
-    },
-    "kSnapshot": {
-      "type": "PATTERN",
-      "value": "[sS][nN][aA][pP][sS][hH][oO][tT]"
-    },
-    "kXml": {
-      "type": "PATTERN",
-      "value": "[xX][mM][lL]"
-    },
-    "kPivot": {
-      "type": "PATTERN",
-      "value": "[pP][iI][vV][oO][tT]"
-    },
-    "kAny": {
-      "type": "PATTERN",
-      "value": "[aA][nN][yY]"
-    },
-    "kInclude": {
-      "type": "PATTERN",
-      "value": "[iI][nN][cC][lL][uU][dD][eE]"
-    },
-    "kExclude": {
-      "type": "PATTERN",
-      "value": "[eE][xX][cC][lL][uU][dD][eE]"
-    },
-    "kUnpivot": {
-      "type": "PATTERN",
-      "value": "[uU][nN][pP][iI][vV][oO][tT]"
-    },
-    "kNoCycle": {
-      "type": "PATTERN",
-      "value": "[nN][oO][cC][yY][cC][lL][eE]"
-    },
-    "kConnect": {
-      "type": "PATTERN",
-      "value": "[cC][oO][nN][nN][eE][cC][tT]"
-    },
-    "kStart": {
-      "type": "PATTERN",
-      "value": "[sS][tT][aA][rR][tT]"
-    },
-    "kGroup": {
-      "type": "PATTERN",
-      "value": "[gG][rR][oO][uU][pP]"
-    },
-    "kRollup": {
-      "type": "PATTERN",
-      "value": "[rR][oO][lL][lL][uU][pP]"
-    },
-    "kCube": {
-      "type": "PATTERN",
-      "value": "[cC][uU][bB][eE]"
-    },
-    "kGrouping": {
-      "type": "PATTERN",
-      "value": "[gG][rR][oO][uU][pP][iI][nN][gG]"
-    },
-    "kSets": {
-      "type": "PATTERN",
-      "value": "[sS][eE][tT][sS]"
-    },
-    "kHaving": {
-      "type": "PATTERN",
-      "value": "[hH][aA][vV][iI][nN][gG]"
-    },
-    "kModel": {
-      "type": "PATTERN",
-      "value": "[mM][oO][dD][eE][lL]"
-    },
-    "kIgnore": {
-      "type": "PATTERN",
-      "value": "[iI][gG][nN][oO][rR][eE]"
-    },
-    "kKeep": {
-      "type": "PATTERN",
-      "value": "[kK][eE][eE][pP]"
-    },
-    "kNav": {
-      "type": "PATTERN",
-      "value": "[nN][aA][vV]"
-    },
-    "kSingle": {
-      "type": "PATTERN",
-      "value": "[sS][iI][nN][gG][lL][eE]"
-    },
-    "kReference": {
-      "type": "PATTERN",
-      "value": "[rR][eE][fF][eE][rR][eE][nN][cC][eE]"
-    },
-    "kDimension": {
-      "type": "PATTERN",
-      "value": "[dD][iI][mM][eE][nN][sS][iI][oO][nN]"
-    },
-    "kUpdated": {
-      "type": "PATTERN",
-      "value": "[uU][pP][dD][aA][tT][eE][dD]"
-    },
-    "kRows": {
-      "type": "PATTERN",
-      "value": "[rR][oO][wW][sS]"
-    },
-    "kMain": {
-      "type": "PATTERN",
-      "value": "[mM][aA][iI][nN]"
-    },
-    "kMeasures": {
-      "type": "PATTERN",
-      "value": "[mM][eE][aA][sS][uU][rR][eE][sS]"
-    },
-    "kUpsert": {
-      "type": "PATTERN",
-      "value": "[uU][pP][sS][eE][rR][tT]"
-    },
-    "kUpdate": {
-      "type": "PATTERN",
-      "value": "[uU][pP][dD][aA][tT][eE]"
-    },
-    "kAutomatic": {
-      "type": "PATTERN",
-      "value": "[aA][uU][tT][oO][mM][aA][tT][iI][cC]"
-    },
-    "kSequential": {
-      "type": "PATTERN",
-      "value": "[sS][eE][qQ][uU][eE][nN][tT][iI][aA][lL]"
-    },
-    "kOrder": {
-      "type": "PATTERN",
-      "value": "[oO][rR][dD][eE][rR]"
-    },
-    "kRules": {
-      "type": "PATTERN",
-      "value": "[rR][uU][lL][eE][sS]"
-    },
-    "kIterate": {
-      "type": "PATTERN",
-      "value": "[iI][tT][eE][rR][aA][tT][eE]"
-    },
-    "kUntil": {
-      "type": "PATTERN",
-      "value": "[uU][nN][tT][iI][lL]"
-    },
-    "kLike": {
-      "type": "PATTERN",
-      "value": "[lL][iI][kK][eE]"
-    },
-    "kSiblings": {
-      "type": "PATTERN",
-      "value": "[sS][iI][bB][lL][iI][nN][gG][sS]"
-    },
-    "kRow": {
-      "type": "PATTERN",
-      "value": "[rR][oO][wW]"
-    },
-    "kOffset": {
-      "type": "PATTERN",
-      "value": "[oO][fF][fF][sS][eE][tT]"
-    },
-    "kNext": {
-      "type": "PATTERN",
-      "value": "[nN][eE][xX][tT]"
-    },
-    "kPercent": {
-      "type": "PATTERN",
-      "value": "[pP][eE][rR][cC][eE][nN][tT]"
+      "value": "[tT][hH][eE][nN]"
     },
     "kTies": {
       "type": "PATTERN",
       "value": "[tT][iI][eE][sS]"
     },
-    "kFetch": {
+    "kTime": {
       "type": "PATTERN",
-      "value": "[fF][eE][tT][cC][hH]"
+      "value": "[tT][iI][mM][eE]"
     },
-    "kSkip": {
+    "kTimestamp": {
       "type": "PATTERN",
-      "value": "[sS][kK][iI][pP]"
+      "value": "[tT][iI][mM][eE][sS][tT][aA][mM][pP]"
     },
-    "kLocked": {
+    "kTimestampLtzUnconstrained": {
       "type": "PATTERN",
-      "value": "[lL][oO][cC][kK][eE][dD]"
+      "value": "[tT][iI][mM][eE][sS][tT][aA][mM][pP][__][lL][tT][zZ][__][uU][nN][cC][oO][nN][sS][tT][rR][aA][iI][nN][eE][dD]"
     },
-    "kWait": {
+    "kTimestampTzUnconstrained": {
       "type": "PATTERN",
-      "value": "[wW][aA][iI][tT]"
+      "value": "[tT][iI][mM][eE][sS][tT][aA][mM][pP][__][tT][zZ][__][uU][nN][cC][oO][nN][sS][tT][rR][aA][iI][nN][eE][dD]"
     },
-    "kNowait": {
+    "kTimestampUnconstrained": {
       "type": "PATTERN",
-      "value": "[nN][oO][wW][aA][iI][tT]"
+      "value": "[tT][iI][mM][eE][sS][tT][aA][mM][pP][__][uU][nN][cC][oO][nN][sS][tT][rR][aA][iI][nN][eE][dD]"
     },
-    "kIntroducer": {
+    "kTimezoneAbbr": {
       "type": "PATTERN",
-      "value": "[iI][nN][tT][rR][oO][dD][uU][cC][eE][rR]"
+      "value": "[tT][iI][mM][eE][zZ][oO][nN][eE][__][aA][bB][bB][rR]"
     },
-    "kColumns": {
+    "kTimezoneHour": {
       "type": "PATTERN",
-      "value": "[cC][oO][lL][uU][mM][nN][sS]"
+      "value": "[tT][iI][mM][eE][zZ][oO][nN][eE][__][hH][oO][uU][rR]"
     },
-    "kXmlTable": {
+    "kTimezoneMinute": {
       "type": "PATTERN",
-      "value": "[xX][mM][lL][tT][aA][bB][lL][eE]"
+      "value": "[tT][iI][mM][eE][zZ][oO][nN][eE][__][mM][iI][nN][uU][tT][eE]"
     },
-    "kValue": {
+    "kTimezoneRegion": {
       "type": "PATTERN",
-      "value": "[vV][aA][lL][uU][eE]"
+      "value": "[tT][iI][mM][eE][zZ][oO][nN][eE][__][rR][eE][gG][iI][oO][nN]"
     },
-    "kPassing": {
+    "kTo": {
       "type": "PATTERN",
-      "value": "[pP][aA][sS][sS][iI][nN][gG]"
+      "value": "[tT][oO]"
     },
-    "kOrdinality": {
+    "kToChar": {
       "type": "PATTERN",
-      "value": "[oO][rR][dD][iI][nN][aA][lL][iI][tT][yY]"
+      "value": "[tT][oO][__][cC][hH][aA][rR]"
     },
-    "kPath": {
+    "kToDate": {
       "type": "PATTERN",
-      "value": "[pP][aA][tT][hH]"
+      "value": "[tT][oO][__][dD][aA][tT][eE]"
     },
-    "kXmlNamespaces": {
+    "kTrailing": {
       "type": "PATTERN",
-      "value": "[xX][mM][lL][nN][aA][mM][eE][sS][pP][aA][cC][eE][sS]"
+      "value": "[tT][rR][aA][iI][lL][iI][nN][gG]"
     },
-    "kDenseRank": {
+    "kTrigger": {
       "type": "PATTERN",
-      "value": "[dD][eE][nN][sS][eE][__][rR][aA][nN][kK]"
+      "value": "[tT][rR][iI][gG][gG][eE][rR]"
     },
-    "kOver": {
+    "kTrim": {
       "type": "PATTERN",
-      "value": "[oO][vV][eE][rR]"
+      "value": "[tT][rR][iI][mM]"
     },
-    "kAnd": {
+    "kTrue": {
       "type": "PATTERN",
-      "value": "[aA][nN][dD]"
+      "value": "[tT][rR][uU][eE]"
+    },
+    "kTruncate": {
+      "type": "PATTERN",
+      "value": "[tT][rR][uU][nN][cC][aA][tT][eE]"
+    },
+    "kType": {
+      "type": "PATTERN",
+      "value": "[tT][yY][pP][eE]"
     },
     "kUnbounded": {
       "type": "PATTERN",
       "value": "[uU][nN][bB][oO][uU][nN][dD][eE][dD]"
     },
-    "kPreceding": {
+    "kUnderscore": {
       "type": "PATTERN",
-      "value": "[pP][rR][eE][cC][eE][dD][iI][nN][gG]"
+      "value": "[__]"
     },
-    "kFollowing": {
+    "kUnion": {
       "type": "PATTERN",
-      "value": "[fF][oO][lL][lL][oO][wW][iI][nN][gG]"
+      "value": "[uU][nN][iI][oO][nN]"
     },
-    "kRef": {
+    "kUnique": {
       "type": "PATTERN",
-      "value": "[rR][eE][fF]"
+      "value": "[uU][nN][iI][qQ][uU][eE]"
     },
-    "kRowType": {
+    "kUnpivot": {
       "type": "PATTERN",
-      "value": "[rR][oO][wW][tT][yY][pP][eE]"
+      "value": "[uU][nN][pP][iI][vV][oO][tT]"
     },
-    "kRecord": {
+    "kUntil": {
       "type": "PATTERN",
-      "value": "[rR][eE][cC][oO][rR][dD]"
+      "value": "[uU][nN][tT][iI][lL]"
     },
-    "kIndexed": {
+    "kUpdate": {
       "type": "PATTERN",
-      "value": "[iI][nN][dD][eE][xX][eE][dD]"
+      "value": "[uU][pP][dD][aA][tT][eE]"
     },
-    "kIndex": {
+    "kUpdated": {
       "type": "PATTERN",
-      "value": "[iI][nN][dD][eE][xX]"
+      "value": "[uU][pP][dD][aA][tT][eE][dD]"
     },
-    "kVarying": {
+    "kUpsert": {
       "type": "PATTERN",
-      "value": "[vV][aA][rR][yY][iI][nN][gG]"
+      "value": "[uU][pP][sS][eE][rR][tT]"
     },
-    "kArray": {
+    "kUrowid": {
       "type": "PATTERN",
-      "value": "[aA][rR][rR][aA][yY]"
+      "value": "[uU][rR][oO][wW][iI][dD]"
+    },
+    "kUsing": {
+      "type": "PATTERN",
+      "value": "[uU][sS][iI][nN][gG]"
+    },
+    "kValue": {
+      "type": "PATTERN",
+      "value": "[vV][aA][lL][uU][eE]"
+    },
+    "kVar": {
+      "type": "PATTERN",
+      "value": "[vV][aA][rR][__]"
+    },
+    "kVarchar2": {
+      "type": "PATTERN",
+      "value": "[vV][aA][rR][cC][hH][aA][rR][22]"
+    },
+    "kVarchar": {
+      "type": "PATTERN",
+      "value": "[vV][aA][rR][cC][hH][aA][rR]"
+    },
+    "kVariance": {
+      "type": "PATTERN",
+      "value": "[vV][aA][rR][iI][aA][nN][cC][eE]"
     },
     "kVarray": {
       "type": "PATTERN",
       "value": "[vV][aA][rR][rR][aA][yY]"
     },
-    "kException": {
+    "kVarying": {
       "type": "PATTERN",
-      "value": "[eE][xX][cC][eE][pP][tT][iI][oO][nN]"
+      "value": "[vV][aA][rR][yY][iI][nN][gG]"
     },
-    "char": {
-      "type": "PREC_RIGHT",
-      "value": 1,
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "kChar"
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "kChar"
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "("
-                  },
-                  {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "FIELD",
-                        "name": "size",
-                        "content": {
-                          "type": "ALIAS",
-                          "content": {
-                            "type": "SYMBOL",
-                            "name": "_natural_number"
-                          },
-                          "named": true,
-                          "value": "literal"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "type": "STRING",
-                    "value": ")"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
+    "kVersions": {
+      "type": "PATTERN",
+      "value": "[vV][eE][rR][sS][iI][oO][nN][sS]"
     },
-    "varchar2": {
-      "type": "PREC_RIGHT",
-      "value": 1,
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "kVarchar2"
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "kVarchar2"
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "("
-                  },
-                  {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "FIELD",
-                        "name": "size",
-                        "content": {
-                          "type": "ALIAS",
-                          "content": {
-                            "type": "SYMBOL",
-                            "name": "_natural_number"
-                          },
-                          "named": true,
-                          "value": "literal"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "type": "STRING",
-                    "value": ")"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
+    "kWNDS": {
+      "type": "PATTERN",
+      "value": "[wW][nN][dD][sS]"
     },
-    "number": {
-      "type": "PREC_RIGHT",
-      "value": 1,
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "kNumber"
-          },
-          {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "kNumber"
-              },
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "("
-                  },
-                  {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "FIELD",
-                        "name": "precision",
-                        "content": {
-                          "type": "ALIAS",
-                          "content": {
-                            "type": "SYMBOL",
-                            "name": "_natural_number"
-                          },
-                          "named": true,
-                          "value": "literal"
-                        }
-                      },
-                      {
-                        "type": "SEQ",
-                        "members": [
-                          {
-                            "type": "STRING",
-                            "value": ","
-                          },
-                          {
-                            "type": "FIELD",
-                            "name": "scale",
-                            "content": {
-                              "type": "ALIAS",
-                              "content": {
-                                "type": "SYMBOL",
-                                "name": "_natural_number"
-                              },
-                              "named": true,
-                              "value": "literal"
-                            }
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "type": "STRING",
-                    "value": ")"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
+    "kWNPS": {
+      "type": "PATTERN",
+      "value": "[wW][nN][pP][sS]"
+    },
+    "kWait": {
+      "type": "PATTERN",
+      "value": "[wW][aA][iI][tT]"
+    },
+    "kWhen": {
+      "type": "PATTERN",
+      "value": "[wW][hH][eE][nN]"
+    },
+    "kWhere": {
+      "type": "PATTERN",
+      "value": "[wW][hH][eE][rR][eE]"
+    },
+    "kWith": {
+      "type": "PATTERN",
+      "value": "[wW][iI][tT][hH]"
+    },
+    "kXml": {
+      "type": "PATTERN",
+      "value": "[xX][mM][lL]"
+    },
+    "kXmlNamespaces": {
+      "type": "PATTERN",
+      "value": "[xX][mM][lL][nN][aA][mM][eE][sS][pP][aA][cC][eE][sS]"
+    },
+    "kXmlTable": {
+      "type": "PATTERN",
+      "value": "[xX][mM][lL][tT][aA][bB][lL][eE]"
+    },
+    "kXmlattributes": {
+      "type": "PATTERN",
+      "value": "[xX][mM][lL][aA][tT][tT][rR][iI][bB][uU][tT][eE][sS]"
+    },
+    "kXmlnamespaces": {
+      "type": "PATTERN",
+      "value": "[xX][mM][lL][nN][aA][mM][eE][sS][pP][aA][cC][eE][sS]"
+    },
+    "kXmltable": {
+      "type": "PATTERN",
+      "value": "[xX][mM][lL][tT][aA][bB][lL][eE]"
+    },
+    "kXmltype": {
+      "type": "PATTERN",
+      "value": "[xX][mM][lL][tT][yY][pP][eE]"
+    },
+    "kYear": {
+      "type": "PATTERN",
+      "value": "[yY][eE][aA][rR]"
+    },
+    "kYes": {
+      "type": "PATTERN",
+      "value": "[yY][eE][sS]"
+    },
+    "kYmintervalUnconstrained": {
+      "type": "PATTERN",
+      "value": "[yY][mM][iI][nN][tT][eE][rR][vV][aA][lL][__][uU][nN][cC][oO][nN][sS][tT][rR][aA][iI][nN][eE][dD]"
+    },
+    "kZone": {
+      "type": "PATTERN",
+      "value": "[zZ][oO][nN][eE]"
     },
     "outer_join_sign": {
       "type": "SEQ",

@@ -41,6 +41,179 @@
     }
   },
   {
+    "type": "block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "body",
+          "named": true
+        },
+        {
+          "type": "declare_spec",
+          "named": true
+        },
+        {
+          "type": "kDeclare",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "body",
+    "named": true,
+    "fields": {
+      "label_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "exception_handler",
+          "named": true
+        },
+        {
+          "type": "kBegin",
+          "named": true
+        },
+        {
+          "type": "kEnd",
+          "named": true
+        },
+        {
+          "type": "kException",
+          "named": true
+        },
+        {
+          "type": "seq_of_statements",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "c_agent_in_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expressions_",
+          "named": true
+        },
+        {
+          "type": "kAgent",
+          "named": true
+        },
+        {
+          "type": "kIn",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "c_parameters_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expressions_",
+          "named": true
+        },
+        {
+          "type": "kParameter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "c_spec",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "c_agent_in_clause",
+          "named": true
+        },
+        {
+          "type": "c_parameters_clause",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "kC",
+          "named": true
+        },
+        {
+          "type": "kContext",
+          "named": true
+        },
+        {
+          "type": "kLibrary",
+          "named": true
+        },
+        {
+          "type": "kName",
+          "named": true
+        },
+        {
+          "type": "kWith",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "call_spec",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "c_spec",
+          "named": true
+        },
+        {
+          "type": "java_spec",
+          "named": true
+        },
+        {
+          "type": "kLanguage",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "cell_assignment",
     "named": true,
     "fields": {},
@@ -89,32 +262,6 @@
         },
         {
           "type": "kUnique",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "char",
-    "named": true,
-    "fields": {
-      "size": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "literal",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "kChar",
           "named": true
         }
       ]
@@ -236,7 +383,19 @@
       "required": true,
       "types": [
         {
-          "type": "comment",
+          "type": "cursor_declaration",
+          "named": true
+        },
+        {
+          "type": "exception_declaration",
+          "named": true
+        },
+        {
+          "type": "function_body",
+          "named": true
+        },
+        {
+          "type": "function_specification",
           "named": true
         },
         {
@@ -274,6 +433,26 @@
         {
           "type": "package_name",
           "named": true
+        },
+        {
+          "type": "procedure_body",
+          "named": true
+        },
+        {
+          "type": "procedure_specification",
+          "named": true
+        },
+        {
+          "type": "subtype_declaration",
+          "named": true
+        },
+        {
+          "type": "type_declaration",
+          "named": true
+        },
+        {
+          "type": "variable_declaration",
+          "named": true
         }
       ]
     }
@@ -287,7 +466,7 @@
       "required": true,
       "types": [
         {
-          "type": "cursoor_declaration",
+          "type": "cursor_declaration",
           "named": true
         },
         {
@@ -393,7 +572,7 @@
     }
   },
   {
-    "type": "cursoor_declaration",
+    "type": "cursor_declaration",
     "named": true,
     "fields": {
       "name": {
@@ -489,7 +668,7 @@
     }
   },
   {
-    "type": "datatype",
+    "type": "data_manipulation_language_statements",
     "named": true,
     "fields": {},
     "children": {
@@ -497,19 +676,140 @@
       "required": true,
       "types": [
         {
-          "type": "char",
+          "type": "select_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "datatype",
+    "named": true,
+    "fields": {
+      "char_set_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
           "named": true
         },
         {
-          "type": "kDate",
+          "type": "kCharacter",
           "named": true
         },
         {
-          "type": "number",
+          "type": "kDay",
           "named": true
         },
         {
-          "type": "varchar2",
+          "type": "kInterval",
+          "named": true
+        },
+        {
+          "type": "kLocal",
+          "named": true
+        },
+        {
+          "type": "kMonth",
+          "named": true
+        },
+        {
+          "type": "kSecond",
+          "named": true
+        },
+        {
+          "type": "kSet",
+          "named": true
+        },
+        {
+          "type": "kTime",
+          "named": true
+        },
+        {
+          "type": "kTo",
+          "named": true
+        },
+        {
+          "type": "kWith",
+          "named": true
+        },
+        {
+          "type": "kYear",
+          "named": true
+        },
+        {
+          "type": "kZone",
+          "named": true
+        },
+        {
+          "type": "native_datatype_element",
+          "named": true
+        },
+        {
+          "type": "precision_part",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "declare_spec",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "cursor_declaration",
+          "named": true
+        },
+        {
+          "type": "exception_declaration",
+          "named": true
+        },
+        {
+          "type": "function_body",
+          "named": true
+        },
+        {
+          "type": "function_specification",
+          "named": true
+        },
+        {
+          "type": "pragma_declaration",
+          "named": true
+        },
+        {
+          "type": "procedure_body",
+          "named": true
+        },
+        {
+          "type": "procedure_specification",
+          "named": true
+        },
+        {
+          "type": "subtype_declaration",
+          "named": true
+        },
+        {
+          "type": "type_declaration",
+          "named": true
+        },
+        {
+          "type": "variable_declaration",
           "named": true
         }
       ]
@@ -586,6 +886,44 @@
       "types": [
         {
           "type": "kException",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "exception_handler",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kOr",
+          "named": true
+        },
+        {
+          "type": "kThen",
+          "named": true
+        },
+        {
+          "type": "kWhen",
+          "named": true
+        },
+        {
+          "type": "seq_of_statements",
           "named": true
         }
       ]
@@ -915,6 +1253,80 @@
     }
   },
   {
+    "type": "function_body",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "body",
+          "named": true
+        },
+        {
+          "type": "call_spec",
+          "named": true
+        },
+        {
+          "type": "kAggregate",
+          "named": true
+        },
+        {
+          "type": "kAs",
+          "named": true
+        },
+        {
+          "type": "kDeclare",
+          "named": true
+        },
+        {
+          "type": "kDeterministic",
+          "named": true
+        },
+        {
+          "type": "kFunction",
+          "named": true
+        },
+        {
+          "type": "kIs",
+          "named": true
+        },
+        {
+          "type": "kPipelined",
+          "named": true
+        },
+        {
+          "type": "kUsing",
+          "named": true
+        },
+        {
+          "type": "parameter_list",
+          "named": true
+        },
+        {
+          "type": "return_type",
+          "named": true
+        },
+        {
+          "type": "seq_of_declare_specs",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "function_specification",
     "named": true,
     "fields": {
@@ -1198,6 +1610,25 @@
     }
   },
   {
+    "type": "java_spec",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kJava",
+          "named": true
+        },
+        {
+          "type": "kName",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "join_clause",
     "named": true,
     "fields": {},
@@ -1283,6 +1714,26 @@
     }
   },
   {
+    "type": "kAuthId",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "kNoCopy",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "kXmlNamespaces",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "kXmlTable",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "keep_clause",
     "named": true,
     "fields": {},
@@ -1315,6 +1766,22 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "label_declaration",
+    "named": true,
+    "fields": {
+      "label_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1699,36 +2166,231 @@
     }
   },
   {
-    "type": "number",
+    "type": "native_datatype_element",
     "named": true,
-    "fields": {
-      "precision": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "literal",
-            "named": true
-          }
-        ]
-      },
-      "scale": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "literal",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
+          "type": "kBfile",
+          "named": true
+        },
+        {
+          "type": "kBinaryDouble",
+          "named": true
+        },
+        {
+          "type": "kBinaryFloat",
+          "named": true
+        },
+        {
+          "type": "kBinaryInteger",
+          "named": true
+        },
+        {
+          "type": "kBlob",
+          "named": true
+        },
+        {
+          "type": "kBoolean",
+          "named": true
+        },
+        {
+          "type": "kChar",
+          "named": true
+        },
+        {
+          "type": "kCharacter",
+          "named": true
+        },
+        {
+          "type": "kClob",
+          "named": true
+        },
+        {
+          "type": "kDate",
+          "named": true
+        },
+        {
+          "type": "kDay",
+          "named": true
+        },
+        {
+          "type": "kDec",
+          "named": true
+        },
+        {
+          "type": "kDecimal",
+          "named": true
+        },
+        {
+          "type": "kDouble",
+          "named": true
+        },
+        {
+          "type": "kDsintervalUnconstrained",
+          "named": true
+        },
+        {
+          "type": "kFloat",
+          "named": true
+        },
+        {
+          "type": "kHour",
+          "named": true
+        },
+        {
+          "type": "kInt",
+          "named": true
+        },
+        {
+          "type": "kInteger",
+          "named": true
+        },
+        {
+          "type": "kLong",
+          "named": true
+        },
+        {
+          "type": "kMinute",
+          "named": true
+        },
+        {
+          "type": "kMlslabel",
+          "named": true
+        },
+        {
+          "type": "kMonth",
+          "named": true
+        },
+        {
+          "type": "kNatural",
+          "named": true
+        },
+        {
+          "type": "kNaturaln",
+          "named": true
+        },
+        {
+          "type": "kNchar",
+          "named": true
+        },
+        {
+          "type": "kNclob",
+          "named": true
+        },
+        {
           "type": "kNumber",
+          "named": true
+        },
+        {
+          "type": "kNumeric",
+          "named": true
+        },
+        {
+          "type": "kNvarchar2",
+          "named": true
+        },
+        {
+          "type": "kPositive",
+          "named": true
+        },
+        {
+          "type": "kPositiven",
+          "named": true
+        },
+        {
+          "type": "kPrecision",
+          "named": true
+        },
+        {
+          "type": "kRaw",
+          "named": true
+        },
+        {
+          "type": "kReal",
+          "named": true
+        },
+        {
+          "type": "kRowid",
+          "named": true
+        },
+        {
+          "type": "kSecond",
+          "named": true
+        },
+        {
+          "type": "kSigntype",
+          "named": true
+        },
+        {
+          "type": "kSimpleInteger",
+          "named": true
+        },
+        {
+          "type": "kSmallint",
+          "named": true
+        },
+        {
+          "type": "kString",
+          "named": true
+        },
+        {
+          "type": "kTimestamp",
+          "named": true
+        },
+        {
+          "type": "kTimestampLtzUnconstrained",
+          "named": true
+        },
+        {
+          "type": "kTimestampTzUnconstrained",
+          "named": true
+        },
+        {
+          "type": "kTimestampUnconstrained",
+          "named": true
+        },
+        {
+          "type": "kTimezoneAbbr",
+          "named": true
+        },
+        {
+          "type": "kTimezoneHour",
+          "named": true
+        },
+        {
+          "type": "kTimezoneMinute",
+          "named": true
+        },
+        {
+          "type": "kTimezoneRegion",
+          "named": true
+        },
+        {
+          "type": "kUrowid",
+          "named": true
+        },
+        {
+          "type": "kVarchar",
+          "named": true
+        },
+        {
+          "type": "kVarchar2",
+          "named": true
+        },
+        {
+          "type": "kXmltype",
+          "named": true
+        },
+        {
+          "type": "kYear",
+          "named": true
+        },
+        {
+          "type": "kYmintervalUnconstrained",
           "named": true
         }
       ]
@@ -2019,6 +2681,53 @@
     }
   },
   {
+    "type": "partition_by_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kAny",
+          "named": true
+        },
+        {
+          "type": "kBy",
+          "named": true
+        },
+        {
+          "type": "kHash",
+          "named": true
+        },
+        {
+          "type": "kList",
+          "named": true
+        },
+        {
+          "type": "kPartition",
+          "named": true
+        },
+        {
+          "type": "kRange",
+          "named": true
+        },
+        {
+          "type": "paren_column_list",
+          "named": true
+        },
+        {
+          "type": "streaming_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "pivot_clause",
     "named": true,
     "fields": {},
@@ -2242,6 +2951,83 @@
     }
   },
   {
+    "type": "precision_part",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "kByte",
+          "named": true
+        },
+        {
+          "type": "kChar",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "procedure_body",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "body",
+          "named": true
+        },
+        {
+          "type": "call_spec",
+          "named": true
+        },
+        {
+          "type": "kAs",
+          "named": true
+        },
+        {
+          "type": "kDeclare",
+          "named": true
+        },
+        {
+          "type": "kExternal",
+          "named": true
+        },
+        {
+          "type": "kIs",
+          "named": true
+        },
+        {
+          "type": "kProcedure",
+          "named": true
+        },
+        {
+          "type": "parameter_list",
+          "named": true
+        },
+        {
+          "type": "seq_of_declare_specs",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "procedure_specification",
     "named": true,
     "fields": {
@@ -2280,7 +3066,7 @@
       "required": false,
       "types": [
         {
-          "type": "statement",
+          "type": "unit_statement",
           "named": true
         }
       ]
@@ -2459,6 +3245,25 @@
         },
         {
           "type": "subquery",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "relies_on_part",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "kReliesOn",
           "named": true
         }
       ]
@@ -2707,6 +3512,40 @@
     }
   },
   {
+    "type": "seq_of_declare_specs",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "declare_spec",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "seq_of_statements",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "label_declaration",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "single_column_for_loop",
     "named": true,
     "fields": {
@@ -2781,6 +3620,21 @@
     }
   },
   {
+    "type": "sql_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "data_manipulation_language_statements",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "start_part",
     "named": true,
     "fields": {},
@@ -2812,15 +3666,46 @@
       "required": true,
       "types": [
         {
-          "type": "create_package_body",
+          "type": "block",
           "named": true
         },
         {
-          "type": "create_package_header",
+          "type": "body",
           "named": true
         },
         {
-          "type": "create_synonym",
+          "type": "sql_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "streaming_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kBy",
+          "named": true
+        },
+        {
+          "type": "kCluser",
+          "named": true
+        },
+        {
+          "type": "kOrder",
+          "named": true
+        },
+        {
+          "type": "paren_column_list",
           "named": true
         }
       ]
@@ -3356,6 +4241,33 @@
     }
   },
   {
+    "type": "unit_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "create_package_body",
+          "named": true
+        },
+        {
+          "type": "create_package_header",
+          "named": true
+        },
+        {
+          "type": "create_synonym",
+          "named": true
+        },
+        {
+          "type": "data_manipulation_language_statements",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "unpivot_clause",
     "named": true,
     "fields": {},
@@ -3458,32 +4370,6 @@
         },
         {
           "type": "kUntil",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "varchar2",
-    "named": true,
-    "fields": {
-      "size": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "literal",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "kVarchar2",
           "named": true
         }
       ]
@@ -3897,6 +4783,10 @@
     "named": false
   },
   {
+    "type": "...",
+    "named": false
+  },
+  {
     "type": "/",
     "named": false
   },
@@ -3910,6 +4800,10 @@
   },
   {
     "type": ";",
+    "named": false
+  },
+  {
+    "type": "<",
     "named": false
   },
   {
@@ -3934,6 +4828,14 @@
   },
   {
     "type": "comment",
+    "named": true
+  },
+  {
+    "type": "kAgent",
+    "named": true
+  },
+  {
+    "type": "kAggregate",
     "named": true
   },
   {
@@ -3969,7 +4871,31 @@
     "named": true
   },
   {
+    "type": "kBegin",
+    "named": true
+  },
+  {
     "type": "kBetween",
+    "named": true
+  },
+  {
+    "type": "kBfile",
+    "named": true
+  },
+  {
+    "type": "kBinaryDouble",
+    "named": true
+  },
+  {
+    "type": "kBinaryFloat",
+    "named": true
+  },
+  {
+    "type": "kBinaryInteger",
+    "named": true
+  },
+  {
+    "type": "kBlob",
     "named": true
   },
   {
@@ -3978,6 +4904,10 @@
   },
   {
     "type": "kBody",
+    "named": true
+  },
+  {
+    "type": "kBoolean",
     "named": true
   },
   {
@@ -3993,11 +4923,31 @@
     "named": true
   },
   {
+    "type": "kByte",
+    "named": true
+  },
+  {
+    "type": "kC",
+    "named": true
+  },
+  {
     "type": "kChar",
     "named": true
   },
   {
+    "type": "kCharacter",
+    "named": true
+  },
+  {
     "type": "kCheck",
+    "named": true
+  },
+  {
+    "type": "kClob",
+    "named": true
+  },
+  {
+    "type": "kCluser",
     "named": true
   },
   {
@@ -4021,6 +4971,10 @@
     "named": true
   },
   {
+    "type": "kContext",
+    "named": true
+  },
+  {
     "type": "kCreate",
     "named": true
   },
@@ -4037,6 +4991,10 @@
     "named": true
   },
   {
+    "type": "kCurrentUser",
+    "named": true
+  },
+  {
     "type": "kCursor",
     "named": true
   },
@@ -4049,7 +5007,27 @@
     "named": true
   },
   {
+    "type": "kDay",
+    "named": true
+  },
+  {
+    "type": "kDec",
+    "named": true
+  },
+  {
+    "type": "kDecimal",
+    "named": true
+  },
+  {
+    "type": "kDeclare",
+    "named": true
+  },
+  {
     "type": "kDefault",
+    "named": true
+  },
+  {
+    "type": "kDefiner",
     "named": true
   },
   {
@@ -4077,6 +5055,14 @@
     "named": true
   },
   {
+    "type": "kDouble",
+    "named": true
+  },
+  {
+    "type": "kDsintervalUnconstrained",
+    "named": true
+  },
+  {
     "type": "kEnd",
     "named": true
   },
@@ -4093,6 +5079,10 @@
     "named": true
   },
   {
+    "type": "kExternal",
+    "named": true
+  },
+  {
     "type": "kFalse",
     "named": true
   },
@@ -4102,6 +5092,10 @@
   },
   {
     "type": "kFirst",
+    "named": true
+  },
+  {
+    "type": "kFloat",
     "named": true
   },
   {
@@ -4133,7 +5127,15 @@
     "named": true
   },
   {
+    "type": "kHash",
+    "named": true
+  },
+  {
     "type": "kHaving",
+    "named": true
+  },
+  {
+    "type": "kHour",
     "named": true
   },
   {
@@ -4169,7 +5171,19 @@
     "named": true
   },
   {
+    "type": "kInt",
+    "named": true
+  },
+  {
+    "type": "kInteger",
+    "named": true
+  },
+  {
     "type": "kIntersect",
+    "named": true
+  },
+  {
+    "type": "kInterval",
     "named": true
   },
   {
@@ -4189,11 +5203,19 @@
     "named": true
   },
   {
+    "type": "kJava",
+    "named": true
+  },
+  {
     "type": "kJoin",
     "named": true
   },
   {
     "type": "kKeep",
+    "named": true
+  },
+  {
+    "type": "kLanguage",
     "named": true
   },
   {
@@ -4205,11 +5227,27 @@
     "named": true
   },
   {
+    "type": "kLibrary",
+    "named": true
+  },
+  {
     "type": "kLike",
     "named": true
   },
   {
+    "type": "kList",
+    "named": true
+  },
+  {
+    "type": "kLocal",
+    "named": true
+  },
+  {
     "type": "kLocked",
+    "named": true
+  },
+  {
+    "type": "kLong",
     "named": true
   },
   {
@@ -4225,7 +5263,23 @@
     "named": true
   },
   {
+    "type": "kMinute",
+    "named": true
+  },
+  {
+    "type": "kMlslabel",
+    "named": true
+  },
+  {
     "type": "kModel",
+    "named": true
+  },
+  {
+    "type": "kMonth",
+    "named": true
+  },
+  {
+    "type": "kName",
     "named": true
   },
   {
@@ -4233,15 +5287,23 @@
     "named": true
   },
   {
+    "type": "kNaturaln",
+    "named": true
+  },
+  {
     "type": "kNav",
     "named": true
   },
   {
-    "type": "kNext",
+    "type": "kNchar",
     "named": true
   },
   {
-    "type": "kNoCopy",
+    "type": "kNclob",
+    "named": true
+  },
+  {
+    "type": "kNext",
     "named": true
   },
   {
@@ -4266,6 +5328,14 @@
   },
   {
     "type": "kNumber",
+    "named": true
+  },
+  {
+    "type": "kNumeric",
+    "named": true
+  },
+  {
+    "type": "kNvarchar2",
     "named": true
   },
   {
@@ -4317,6 +5387,14 @@
     "named": true
   },
   {
+    "type": "kParallelEnable",
+    "named": true
+  },
+  {
+    "type": "kParameter",
+    "named": true
+  },
+  {
     "type": "kPartition",
     "named": true
   },
@@ -4341,11 +5419,23 @@
     "named": true
   },
   {
+    "type": "kPositive",
+    "named": true
+  },
+  {
+    "type": "kPositiven",
+    "named": true
+  },
+  {
     "type": "kPragma",
     "named": true
   },
   {
     "type": "kPreceding",
+    "named": true
+  },
+  {
+    "type": "kPrecision",
     "named": true
   },
   {
@@ -4365,7 +5455,15 @@
     "named": true
   },
   {
+    "type": "kRaw",
+    "named": true
+  },
+  {
     "type": "kRead",
+    "named": true
+  },
+  {
+    "type": "kReal",
     "named": true
   },
   {
@@ -4378,6 +5476,10 @@
   },
   {
     "type": "kReference",
+    "named": true
+  },
+  {
+    "type": "kReliesOn",
     "named": true
   },
   {
@@ -4413,6 +5515,10 @@
     "named": true
   },
   {
+    "type": "kRowid",
+    "named": true
+  },
+  {
     "type": "kRows",
     "named": true
   },
@@ -4430,6 +5536,10 @@
   },
   {
     "type": "kSearch",
+    "named": true
+  },
+  {
+    "type": "kSecond",
     "named": true
   },
   {
@@ -4461,11 +5571,23 @@
     "named": true
   },
   {
+    "type": "kSigntype",
+    "named": true
+  },
+  {
+    "type": "kSimpleInteger",
+    "named": true
+  },
+  {
     "type": "kSingle",
     "named": true
   },
   {
     "type": "kSkip",
+    "named": true
+  },
+  {
+    "type": "kSmallint",
     "named": true
   },
   {
@@ -4482,6 +5604,10 @@
   },
   {
     "type": "kStrYes",
+    "named": true
+  },
+  {
+    "type": "kString",
     "named": true
   },
   {
@@ -4505,11 +5631,47 @@
     "named": true
   },
   {
+    "type": "kThen",
+    "named": true
+  },
+  {
     "type": "kTies",
     "named": true
   },
   {
+    "type": "kTime",
+    "named": true
+  },
+  {
     "type": "kTimestamp",
+    "named": true
+  },
+  {
+    "type": "kTimestampLtzUnconstrained",
+    "named": true
+  },
+  {
+    "type": "kTimestampTzUnconstrained",
+    "named": true
+  },
+  {
+    "type": "kTimestampUnconstrained",
+    "named": true
+  },
+  {
+    "type": "kTimezoneAbbr",
+    "named": true
+  },
+  {
+    "type": "kTimezoneHour",
+    "named": true
+  },
+  {
+    "type": "kTimezoneMinute",
+    "named": true
+  },
+  {
+    "type": "kTimezoneRegion",
     "named": true
   },
   {
@@ -4557,11 +5719,19 @@
     "named": true
   },
   {
+    "type": "kUrowid",
+    "named": true
+  },
+  {
     "type": "kUsing",
     "named": true
   },
   {
     "type": "kValue",
+    "named": true
+  },
+  {
+    "type": "kVarchar",
     "named": true
   },
   {
@@ -4593,6 +5763,10 @@
     "named": true
   },
   {
+    "type": "kWhen",
+    "named": true
+  },
+  {
     "type": "kWhere",
     "named": true
   },
@@ -4605,11 +5779,19 @@
     "named": true
   },
   {
-    "type": "kXmlNamespaces",
+    "type": "kXmltype",
     "named": true
   },
   {
-    "type": "kXmlTable",
+    "type": "kYear",
+    "named": true
+  },
+  {
+    "type": "kYmintervalUnconstrained",
+    "named": true
+  },
+  {
+    "type": "kZone",
     "named": true
   },
   {
