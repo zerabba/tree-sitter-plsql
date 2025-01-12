@@ -1,0 +1,33 @@
+{
+  "grammars": [
+    {
+      "name": "plsql",
+      "camelcase": "Plsql",
+      "scope": "source.plsql",
+      "path": ".",
+      "file-types": null,
+      "injection-regex": "^plsql$"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "license": "MIT",
+    "description": "tree-sitter for plsql language",
+    "authors": [
+      {
+        "name": "zerabba"
+      }
+    ],
+    "links": {
+      "repository": "git+https://github.com/zerabba/tree-sitter-plsql.git"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true
+  }
+}
