@@ -8,6 +8,7 @@ module.exports = grammar({
     $.marginalia,
   ],
 
+  externals: $ => [$.perl_quoted_string, $.error_sentinel],
 
   conflicts: $ => [
     [$.select_only_statement, $.subquery_basic_elements],
@@ -1627,12 +1628,12 @@ module.exports = grammar({
 
     _double_quote_string: _ => /"[^"]*"/,
 
-    _single_quote_string: _ => seq(/([uU]&)?'([^']|'')*'/, repeat(/'([^']|'')*'/)),
+    single_quote_string: _ => seq(/([uU]&)?'([^']|'')*'/, repeat(/'([^']|'')*'/)),
     _literal_string: $ => prec(
       1,
       choice(
-        $._single_quote_string,
-        $._double_quote_string,
+        $.single_quote_string,
+        $.perl_quoted_string
         // $._dollar_quoted_string,
       ),
     ),
