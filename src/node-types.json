@@ -26,6 +26,29 @@
     }
   },
   {
+    "type": "assignment_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bind_variable",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "general_element",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "bind_variable",
     "named": true,
     "fields": {},
@@ -375,6 +398,40 @@
     }
   },
   {
+    "type": "continue_statement",
+    "named": true,
+    "fields": {
+      "label_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "condition",
+          "named": true
+        },
+        {
+          "type": "kContinue",
+          "named": true
+        },
+        {
+          "type": "kWhen",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "create_package_body",
     "named": true,
     "fields": {},
@@ -604,6 +661,60 @@
         },
         {
           "type": "select_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "cursor_loop_param",
+    "named": true,
+    "fields": {
+      "index_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "cursor_name",
+          "named": true
+        },
+        {
+          "type": "expressions_",
+          "named": true
+        },
+        {
+          "type": "kIn",
+          "named": true
+        },
+        {
+          "type": "kReverse",
+          "named": true
+        },
+        {
+          "type": "lower_bound",
+          "named": true
+        },
+        {
+          "type": "record_name",
+          "named": true
+        },
+        {
+          "type": "select_statement",
+          "named": true
+        },
+        {
+          "type": "upper_bound",
           "named": true
         }
       ]
@@ -866,6 +977,52 @@
     }
   },
   {
+    "type": "else_part",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kElse",
+          "named": true
+        },
+        {
+          "type": "seq_of_statements",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "elsif_part",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "condition",
+          "named": true
+        },
+        {
+          "type": "kElsif",
+          "named": true
+        },
+        {
+          "type": "kThen",
+          "named": true
+        },
+        {
+          "type": "seq_of_statements",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "exception_declaration",
     "named": true,
     "fields": {
@@ -924,6 +1081,40 @@
         },
         {
           "type": "seq_of_statements",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "exit_statement",
+    "named": true,
+    "fields": {
+      "label_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "condition",
+          "named": true
+        },
+        {
+          "type": "kExit",
+          "named": true
+        },
+        {
+          "type": "kWhen",
           "named": true
         }
       ]
@@ -1280,6 +1471,10 @@
           "named": true
         },
         {
+          "type": "invoker_rights_clause",
+          "named": true
+        },
+        {
           "type": "kAggregate",
           "named": true
         },
@@ -1312,7 +1507,15 @@
           "named": true
         },
         {
+          "type": "parallel_enable_clause",
+          "named": true
+        },
+        {
           "type": "parameter_list",
+          "named": true
+        },
+        {
+          "type": "result_cache_clause",
           "named": true
         },
         {
@@ -1426,6 +1629,32 @@
         },
         {
           "type": "kIntroducer",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "goto_statement",
+    "named": true,
+    "fields": {
+      "label_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "kGoto",
           "named": true
         }
       ]
@@ -1583,6 +1812,45 @@
     "fields": {}
   },
   {
+    "type": "if_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "condition",
+          "named": true
+        },
+        {
+          "type": "else_part",
+          "named": true
+        },
+        {
+          "type": "elsif_part",
+          "named": true
+        },
+        {
+          "type": "kEnd",
+          "named": true
+        },
+        {
+          "type": "kIf",
+          "named": true
+        },
+        {
+          "type": "kThen",
+          "named": true
+        },
+        {
+          "type": "seq_of_statements",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "into_clause",
     "named": true,
     "fields": {},
@@ -1604,6 +1872,29 @@
         },
         {
           "type": "variable_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "invoker_rights_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kAuthId",
+          "named": true
+        },
+        {
+          "type": "kCurrentUser",
+          "named": true
+        },
+        {
+          "type": "kDefiner",
           "named": true
         }
       ]
@@ -1714,26 +2005,6 @@
     }
   },
   {
-    "type": "kAuthId",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "kNoCopy",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "kXmlNamespaces",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "kXmlTable",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "keep_clause",
     "named": true,
     "fields": {},
@@ -1802,6 +2073,75 @@
         },
         {
           "type": "kTrue",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "loop_statement",
+    "named": true,
+    "fields": {
+      "label_name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "condition",
+          "named": true
+        },
+        {
+          "type": "cursor_loop_param",
+          "named": true
+        },
+        {
+          "type": "kEnd",
+          "named": true
+        },
+        {
+          "type": "kFor",
+          "named": true
+        },
+        {
+          "type": "kLoop",
+          "named": true
+        },
+        {
+          "type": "kWhile",
+          "named": true
+        },
+        {
+          "type": "label_declaration",
+          "named": true
+        },
+        {
+          "type": "seq_of_statements",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "lower_bound",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "concatenation",
           "named": true
         }
       ]
@@ -2571,6 +2911,25 @@
     }
   },
   {
+    "type": "parallel_enable_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kParallelEnable",
+          "named": true
+        },
+        {
+          "type": "partition_by_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "parameter",
     "named": true,
     "fields": {
@@ -3060,6 +3419,7 @@
   {
     "type": "program",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -3157,6 +3517,25 @@
         },
         {
           "type": "subquery",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "record_name",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "bind_variable",
+          "named": true
+        },
+        {
+          "type": "identifier",
           "named": true
         }
       ]
@@ -3264,6 +3643,25 @@
         },
         {
           "type": "kReliesOn",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "result_cache_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "kResultCache",
+          "named": true
+        },
+        {
+          "type": "relies_on_part",
           "named": true
         }
       ]
@@ -3666,11 +4064,35 @@
       "required": true,
       "types": [
         {
+          "type": "assignment_statement",
+          "named": true
+        },
+        {
           "type": "block",
           "named": true
         },
         {
           "type": "body",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "exit_statement",
+          "named": true
+        },
+        {
+          "type": "goto_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "loop_statement",
           "named": true
         },
         {
@@ -4376,6 +4798,21 @@
     }
   },
   {
+    "type": "upper_bound",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "concatenation",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "variable_declaration",
     "named": true,
     "fields": {},
@@ -4863,6 +5300,10 @@
     "named": true
   },
   {
+    "type": "kAuthId",
+    "named": true
+  },
+  {
     "type": "kAutomatic",
     "named": true
   },
@@ -4975,6 +5416,10 @@
     "named": true
   },
   {
+    "type": "kContinue",
+    "named": true
+  },
+  {
     "type": "kCreate",
     "named": true
   },
@@ -5063,6 +5508,14 @@
     "named": true
   },
   {
+    "type": "kElse",
+    "named": true
+  },
+  {
+    "type": "kElsif",
+    "named": true
+  },
+  {
     "type": "kEnd",
     "named": true
   },
@@ -5076,6 +5529,10 @@
   },
   {
     "type": "kExclude",
+    "named": true
+  },
+  {
+    "type": "kExit",
     "named": true
   },
   {
@@ -5119,6 +5576,10 @@
     "named": true
   },
   {
+    "type": "kGoto",
+    "named": true
+  },
+  {
     "type": "kGroup",
     "named": true
   },
@@ -5136,6 +5597,10 @@
   },
   {
     "type": "kHour",
+    "named": true
+  },
+  {
+    "type": "kIf",
     "named": true
   },
   {
@@ -5251,6 +5716,10 @@
     "named": true
   },
   {
+    "type": "kLoop",
+    "named": true
+  },
+  {
     "type": "kMain",
     "named": true
   },
@@ -5304,6 +5773,10 @@
   },
   {
     "type": "kNext",
+    "named": true
+  },
+  {
+    "type": "kNoCopy",
     "named": true
   },
   {
@@ -5496,6 +5969,10 @@
   },
   {
     "type": "kReturn",
+    "named": true
+  },
+  {
+    "type": "kReverse",
     "named": true
   },
   {
@@ -5771,11 +6248,23 @@
     "named": true
   },
   {
+    "type": "kWhile",
+    "named": true
+  },
+  {
     "type": "kWith",
     "named": true
   },
   {
     "type": "kXml",
+    "named": true
+  },
+  {
+    "type": "kXmlNamespaces",
+    "named": true
+  },
+  {
+    "type": "kXmlTable",
     "named": true
   },
   {

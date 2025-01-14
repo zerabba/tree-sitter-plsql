@@ -157,9 +157,11 @@ module.exports = grammar({
     ),
 
     seq_of_statements: $ => repeat1(
+      prec.left(
       choice(
         seq($.statement, ';'),
         $.label_declaration,
+      ),
       ),
     ),
 
@@ -174,9 +176,110 @@ module.exports = grammar({
     statement: $ => choice(
       $.body,
       $.block,
+      $.assignment_statement,
+      $.continue_statement,
+      $.exit_statement,
+      $.goto_statement,
+      $.if_statement,
+      $.loop_statement,
       $.sql_statement,
       // TODO: add more statements
     ),
+
+    assignment_statement: $ => seq(
+      choice($.general_element, $.bind_variable),
+      ':=',
+      $.expression,
+    ),
+
+    continue_statement: $ => seq(
+      $.kContinue,
+      optional(field('label_name', $.identifier)),
+      optional(seq($.kWhen, $.condition)),
+    ),
+
+    exit_statement: $ => seq(
+      $.kExit,
+      optional(field('label_name', $.identifier)),
+      optional(seq($.kWhen, $.condition)),
+    ),
+
+    goto_statement: $ => seq(
+      $.kGoto,
+      field('label_name', $.identifier),
+    ),
+
+    if_statement: $ => seq(
+      $.kIf,
+      $.condition,
+      $.kThen,
+      $.seq_of_statements,
+      repeat($.elsif_part),
+      optional($.else_part),
+      $.kEnd,
+      $.kIf,
+    ),
+
+    elsif_part: $ => seq(
+      $.kElsif,
+      $.condition,
+      $.kThen,
+      $.seq_of_statements,
+    ),
+
+    else_part: $ => seq(
+      $.kElse,
+      $.seq_of_statements,
+    ),
+
+    loop_statement: $ => seq(
+      optional($.label_declaration),
+      optional(choice(seq($.kWhile, $.condition), seq($.kFor, $.cursor_loop_param))),
+      $.kLoop,
+      $.seq_of_statements,
+      $.kEnd,
+      $.kLoop,
+      optional(field('label_name', $.identifier)),
+    ),
+
+    cursor_loop_param: $ => seq(
+      choice(
+        seq(field('index_name', $.identifier), $.kIn, optional($.kReverse), $.lower_bound, '..', $.upper_bound),
+        seq($.record_name, $.kIn,
+            choice(
+              seq($.cursor_name, optional(seq('(', $.expressions_, ')'))),
+              seq('(', $.select_statement, ')'),
+            ),
+           ),
+      ),
+    ),
+
+    forall_statement: $ => seq(
+      $.kForall,
+      field('index_name', $.identifier),
+      $.kIn,
+      $.bounds_clause,
+      $.sql_statement,
+      optional(seq($.kSave, $.kExceptions)),
+    ),
+
+    bounds_clause: $ => choice(
+      seq($.lower_bound, '..', $.upper_bound),
+      seq($.kIndicesOf, field('collection_name', $.identifier), optional($.between_bound)),
+      seq($.kValuesOf, field('index_name', $.identifier)),
+    ),
+
+    between_bound: $ => seq(
+      $.kBetween,
+      $.lower_bound,
+      $.kAnd,
+      $.upper_bound,
+    ),
+
+    lower_bound: $ => $.concatenation,
+
+    upper_bound: $ => $.concatenation,
+
 
     seq_of_declare_specs: $ => repeat1($.declare_spec),
 
@@ -887,6 +990,11 @@ module.exports = grammar({
       $.bind_variable,
     ),
 
+    record_name: $ => prec.left(choice(
+      $.identifier,
+      $.bind_variable,
+    ),),
+
     tableview_name: $ => prec.left(
       choice(
         seq(
@@ -1144,15 +1252,16 @@ module.exports = grammar({
       field('name', $.identifier),
       optional($.parameter_list),
       $.return_type,
-      // TODO: solve this conflict
-      // repeat(
-      //   choice(
-      //     $.invoker_rights_clause,
-      //     $.parallel_enable_clause,
-      //     $.result_cache_clause,
-      //     $.kDeterministic,
-      //   ),
-      // ),
+      repeat(
+        prec.left(
+          choice(
+            $.invoker_rights_clause,
+            $.parallel_enable_clause,
+            $.result_cache_clause,
+            $.kDeterministic,
+          ),
+        ),
+      ),
       choice(
         seq(
           optional($.kPipelined),
@@ -1604,6 +1713,20 @@ module.exports = grammar({
     kYes: _ => make_keyword("YES"),
     kYmintervalUnconstrained: _ => make_keyword("YMINTERVAL_UNCONSTRAINED"),
     kZone: _ => make_keyword("ZONE"),
+    kContinue: _ => make_keyword("CONTINUE"),
+    kExit: _ => make_keyword("EXIT"),
+    kGoto: _ => make_keyword("GOTO"),
+    kIf: _ => make_keyword("IF"),
+    kElsif: _ => make_keyword("ELSIF"),
+    kElse: _ => make_keyword("ELSE"),
+    kWhile: _ => make_keyword("WHILE"),
+    kLoop: _ => make_keyword("LOOP"),
+    kReverse: _ => make_keyword("REVERSE"),
+    kSave: _ => make_keyword("SAVE"),
+    kExceptions: _ => make_keyword("EXCEPTIONS"),
+    kForall: _ => make_keyword("FORALL"),
+    kIndicesOf: _ => make_keyword("INDICES OF"),
+    kValuesOf: _ => make_keyword("VALUES OF"),
 
 
     outer_join_sign: $ => seq('(', '+', ')'),
