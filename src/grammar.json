@@ -1,7 +1,7 @@
 {
   "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "plsql",
-  "word": "_identifier",
+  "word": "regular_id",
   "rules": {
     "program": {
       "type": "SEQ",
@@ -100,12 +100,37 @@
           ]
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "kEditionable"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "kNoneditionable"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "SYMBOL",
           "name": "kPackage"
         },
         {
-          "type": "SYMBOL",
-          "name": "package_name"
+          "type": "RESERVED",
+          "content": {
+            "type": "SYMBOL",
+            "name": "package_name"
+          },
+          "context_name": "package_name_decl"
         },
         {
           "type": "CHOICE",
@@ -169,7 +194,146 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_identifier"
+              "name": "regular_id"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ";"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "create_package_body": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "kCreate"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_or_replace"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "kEditionable"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "kNoneditionable"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kPackage"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kBody"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "package_name"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "kIs"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "kAs"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "variable_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "subtype_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "cursor_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "exception_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "type_declaration"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "function_specification"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "procedure_specification"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "procedure_body"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "function_body"
+              }
+            ]
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "kEnd"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "regular_id"
             },
             {
               "type": "BLANK"
@@ -5394,7 +5558,7 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "_single_quote_string"
+            "name": "single_quote_string"
           }
         }
       ]
@@ -5421,7 +5585,7 @@
                   "name": "name",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "_single_quote_string"
+                    "name": "single_quote_string"
                   }
                 }
               ]
@@ -7532,124 +7696,6 @@
         {
           "type": "SYMBOL",
           "name": "kType"
-        }
-      ]
-    },
-    "create_package_body": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "kCreate"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_or_replace"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "kPackage"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "kBody"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "package_name"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "kIs"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "kAs"
-            }
-          ]
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "variable_declaration"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "subtype_declaration"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "cursor_declaration"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "exception_declaration"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "type_declaration"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "function_specification"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "procedure_specification"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "procedure_body"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "function_body"
-              }
-            ]
-          }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "kEnd"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_identifier"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": ";"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
         }
       ]
     },
@@ -9795,11 +9841,11 @@
       "type": "PATTERN",
       "value": "\\/\\*[^*]*\\*+(?:[^/*][^*]*\\*+)*\\/"
     },
-    "_double_quote_string": {
+    "delimited_id": {
       "type": "PATTERN",
-      "value": "\"[^\"]*\""
+      "value": "\"([^\"\\r\\n]|\"\")+\""
     },
-    "_single_quote_string": {
+    "single_quote_string": {
       "type": "SEQ",
       "members": [
         {
@@ -9823,11 +9869,11 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "_single_quote_string"
+            "name": "single_quote_string"
           },
           {
             "type": "SYMBOL",
-            "name": "_double_quote_string"
+            "name": "perl_quoted_string"
           }
         ]
       }
@@ -9914,21 +9960,17 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_identifier"
+          "name": "regular_id"
         },
         {
           "type": "SYMBOL",
-          "name": "_double_quote_string"
-        },
-        {
-          "type": "PATTERN",
-          "value": "`([a-zA-Z_][0-9a-zA-Z_]*)`"
+          "name": "delimited_id"
         }
       ]
     },
-    "_identifier": {
+    "regular_id": {
       "type": "PATTERN",
-      "value": "[a-zA-Z_][0-9a-zA-Z_]*"
+      "value": "[a-zA-Z_][0-9a-zA-Z_$#]*"
     }
   },
   "extras": [
@@ -9956,7 +9998,25 @@
     ]
   ],
   "precedences": [],
-  "externals": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "perl_quoted_string"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "error_sentinel"
+    }
+  ],
   "inline": [],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {
+    "global": [],
+    "package_name_decl": [
+      {
+        "type": "SYMBOL",
+        "name": "kBody"
+      }
+    ]
+  }
 }
