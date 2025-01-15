@@ -173,7 +173,18 @@
   {
     "type": "c_spec",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "single_quote_string",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -468,11 +479,19 @@
           "named": true
         },
         {
+          "type": "kEditionable",
+          "named": true
+        },
+        {
           "type": "kEnd",
           "named": true
         },
         {
           "type": "kIs",
+          "named": true
+        },
+        {
+          "type": "kNoneditionable",
           "named": true
         },
         {
@@ -497,6 +516,10 @@
         },
         {
           "type": "procedure_specification",
+          "named": true
+        },
+        {
+          "type": "regular_id",
           "named": true
         },
         {
@@ -543,11 +566,19 @@
           "named": true
         },
         {
+          "type": "kEditionable",
+          "named": true
+        },
+        {
           "type": "kEnd",
           "named": true
         },
         {
           "type": "kIs",
+          "named": true
+        },
+        {
+          "type": "kNoneditionable",
           "named": true
         },
         {
@@ -572,6 +603,10 @@
         },
         {
           "type": "procedure_specification",
+          "named": true
+        },
+        {
+          "type": "regular_id",
           "named": true
         },
         {
@@ -1809,7 +1844,21 @@
   {
     "type": "identifier",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "delimited_id",
+          "named": true
+        },
+        {
+          "type": "regular_id",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "if_statement",
@@ -1903,7 +1952,18 @@
   {
     "type": "java_spec",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "single_quote_string",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -2073,6 +2133,14 @@
         },
         {
           "type": "kTrue",
+          "named": true
+        },
+        {
+          "type": "perl_quoted_string",
+          "named": true
+        },
+        {
+          "type": "single_quote_string",
           "named": true
         }
       ]
@@ -3040,6 +3108,53 @@
     }
   },
   {
+    "type": "partition_by_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kAny",
+          "named": true
+        },
+        {
+          "type": "kBy",
+          "named": true
+        },
+        {
+          "type": "kHash",
+          "named": true
+        },
+        {
+          "type": "kList",
+          "named": true
+        },
+        {
+          "type": "kPartition",
+          "named": true
+        },
+        {
+          "type": "kRange",
+          "named": true
+        },
+        {
+          "type": "paren_column_list",
+          "named": true
+        },
+        {
+          "type": "streaming_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "pivot_clause",
     "named": true,
     "fields": {},
@@ -3971,6 +4086,11 @@
     }
   },
   {
+    "type": "single_quote_string",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "sql_statement",
     "named": true,
     "fields": {},
@@ -4050,6 +4170,37 @@
         },
         {
           "type": "sql_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "streaming_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "kBy",
+          "named": true
+        },
+        {
+          "type": "kCluser",
+          "named": true
+        },
+        {
+          "type": "kOrder",
+          "named": true
+        },
+        {
+          "type": "paren_column_list",
           "named": true
         }
       ]
@@ -5190,6 +5341,10 @@
     "named": true
   },
   {
+    "type": "delimited_id",
+    "named": true
+  },
+  {
     "type": "kAgent",
     "named": true
   },
@@ -5310,6 +5465,10 @@
     "named": true
   },
   {
+    "type": "kCluser",
+    "named": true
+  },
+  {
     "type": "kCollect",
     "named": true
   },
@@ -5354,6 +5513,10 @@
     "named": true
   },
   {
+    "type": "kCurrentUser",
+    "named": true
+  },
+  {
     "type": "kCursor",
     "named": true
   },
@@ -5386,6 +5549,10 @@
     "named": true
   },
   {
+    "type": "kDefiner",
+    "named": true
+  },
+  {
     "type": "kDenseRank",
     "named": true
   },
@@ -5415,6 +5582,10 @@
   },
   {
     "type": "kDsintervalUnconstrained",
+    "named": true
+  },
+  {
+    "type": "kEditionable",
     "named": true
   },
   {
@@ -5495,6 +5666,10 @@
   },
   {
     "type": "kGrouping",
+    "named": true
+  },
+  {
+    "type": "kHash",
     "named": true
   },
   {
@@ -5606,6 +5781,10 @@
     "named": true
   },
   {
+    "type": "kList",
+    "named": true
+  },
+  {
     "type": "kLocal",
     "named": true
   },
@@ -5686,6 +5865,10 @@
     "named": true
   },
   {
+    "type": "kNoneditionable",
+    "named": true
+  },
+  {
     "type": "kNot",
     "named": true
   },
@@ -5759,6 +5942,10 @@
   },
   {
     "type": "kPackage",
+    "named": true
+  },
+  {
+    "type": "kParallelEnable",
     "named": true
   },
   {
@@ -5847,6 +6034,10 @@
   },
   {
     "type": "kReference",
+    "named": true
+  },
+  {
+    "type": "kReliesOn",
     "named": true
   },
   {
@@ -6179,6 +6370,14 @@
   },
   {
     "type": "marginalia",
+    "named": true
+  },
+  {
+    "type": "perl_quoted_string",
+    "named": true
+  },
+  {
+    "type": "regular_id",
     "named": true
   },
   {
