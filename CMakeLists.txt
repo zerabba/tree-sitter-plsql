@@ -9,7 +9,7 @@ project(tree-sitter-plsql
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
 option(TREE_SITTER_REUSE_ALLOCATOR "Reuse the library allocator" OFF)
 
-set(TREE_SITTER_ABI_VERSION 14 CACHE STRING "Tree-sitter ABI version")
+set(TREE_SITTER_ABI_VERSION 15 CACHE STRING "Tree-sitter ABI version")
 if(NOT ${TREE_SITTER_ABI_VERSION} MATCHES "^[0-9]+$")
     unset(TREE_SITTER_ABI_VERSION CACHE)
     message(FATAL_ERROR "TREE_SITTER_ABI_VERSION must be an integer")
@@ -55,6 +55,10 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/tree-sitter-plsql.pc"
         DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig")
 install(TARGETS tree-sitter-plsql
         LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}")
+
+file(GLOB QUERIES queries/*.scm)
+install(FILES ${QUERIES}
+        DESTINATION "${CMAKE_INSTALL_DATADIR}/tree-sitter/queries/plsql")
 
 add_custom_target(ts-test "${TREE_SITTER_CLI}" test
                   WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
