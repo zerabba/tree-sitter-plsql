@@ -14,7 +14,12 @@ module.exports = grammar({
     [$.select_only_statement, $.subquery_basic_elements],
   ],
 
-  word: $ => $._identifier,
+  word: $ => $.regular_id,
+  
+  reserved: {
+    global: $ => [],
+    package_name_decl: $ => [$.kBody]
+  },
 
   rules: {
     program: $ => seq(
@@ -52,8 +57,9 @@ module.exports = grammar({
     create_package_header: $ => seq(
       $.kCreate,
       optional($._or_replace),
+      optional(choice($.kEditionable, $.kNoneditionable)),
       $.kPackage,
-      $.package_name,
+      reserved('package_name_decl', $.package_name),
       choice($.kIs, $.kAs),
       repeat(
         choice(
@@ -68,7 +74,33 @@ module.exports = grammar({
         ),
       ),
       $.kEnd,
-      optional($._identifier),
+      optional($.regular_id),
+      optional(';')
+    ),
+
+    create_package_body: $ => seq(
+      $.kCreate,
+      optional($._or_replace),
+      optional(choice($.kEditionable, $.kNoneditionable)),
+      $.kPackage,
+      $.kBody,
+      $.package_name,
+      choice($.kIs, $.kAs),
+      repeat(
+        choice(
+          $.variable_declaration,
+          $.subtype_declaration,
+          $.cursor_declaration,
+          $.exception_declaration,
+          $.type_declaration,
+          $.function_specification,
+          $.procedure_specification,
+          $.procedure_body,
+          $.function_body,
+        ),
+      ),
+      $.kEnd,
+      optional($.regular_id),
       optional(';')
     ),
 
@@ -757,12 +789,12 @@ module.exports = grammar({
     java_spec: $ => seq(
       $.kJava,
       $.kName,
-      field('name', $._single_quote_string),
+      field('name', $.single_quote_string),
     ),
 
     c_spec: $ => seq(
       $.kC,
-      optional(seq($.kName, field('name', $._single_quote_string))),
+      optional(seq($.kName, field('name', $.single_quote_string))),
       $.kLibrary,
       $.identifier,
       optional($.c_agent_in_clause),
@@ -1113,31 +1145,6 @@ module.exports = grammar({
       field('column', $.identifier),
       '%',
       $.kType,
-    ),
-
-    create_package_body: $ => seq(
-      $.kCreate,
-      optional($._or_replace),
-      $.kPackage,
-      $.kBody,
-      $.package_name,
-      choice($.kIs, $.kAs),
-      repeat(
-        choice(
-          $.variable_declaration,
-          $.subtype_declaration,
-          $.cursor_declaration,
-          $.exception_declaration,
-          $.type_declaration,
-          $.function_specification,
-          $.procedure_specification,
-          $.procedure_body,
-          $.function_body,
-        ),
-      ),
-      $.kEnd,
-      optional($._identifier),
-      optional(';')
     ),
 
     function_body: $ => seq(
@@ -1626,7 +1633,7 @@ module.exports = grammar({
     // https://stackoverflow.com/questions/13014947/regex-to-match-a-c-style-multiline-comment
     marginalia: _ => /\/\*[^*]*\*+(?:[^/*][^*]*\*+)*\//,
 
-    _double_quote_string: _ => /"[^"]*"/,
+    delimited_id: _ => /"([^"\r\n]|"")+"/,
 
     single_quote_string: _ => seq(/([uU]&)?'([^']|'')*'/, repeat(/'([^']|'')*'/)),
     _literal_string: $ => prec(
@@ -1654,11 +1661,10 @@ module.exports = grammar({
     ),
 
     identifier: $ => choice(
-      $._identifier,
-      $._double_quote_string,
-      /`([a-zA-Z_][0-9a-zA-Z_]*)`/,
+      $.regular_id,
+      $.delimited_id,
     ),
-    _identifier: _ => /[a-zA-Z_][0-9a-zA-Z_]*/,
+    regular_id: _ => /[a-zA-Z_][0-9a-zA-Z_$#]*/,
   }
 });
 
@@ -1703,7 +1709,7 @@ function parametric_type($, type, params = ['size']) {
 function make_keyword(word) {
   str = "";
   for (var i = 0; i < word.length; i++) {
-    str = str + "[" + word.charAt(i).toLowerCase() + word.charAt(i).toUpperCase() + "]";
+    str += "[" + word.charAt(i).toLowerCase() + word.charAt(i).toUpperCase() + "]";
   }
   return new RegExp(str);
 }
